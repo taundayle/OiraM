@@ -75,6 +75,8 @@ namespace Script_Minh.Input_System
             }
             logoGroup.alpha = 0f;
 
+            yield return new WaitForSeconds(0.5f);
+
             // Chuyển scene
             SceneManager.LoadScene(nextSceneIndex);
         }
