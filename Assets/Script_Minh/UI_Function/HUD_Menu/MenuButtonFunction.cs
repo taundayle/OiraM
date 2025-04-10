@@ -62,6 +62,8 @@ namespace Script_Minh.Input_System
             // Đợi thời gian animation hoàn thành
             yield return new WaitForSeconds(durationAnimation);
 
+            yield return new WaitForSeconds(0.5f);
+
             // Gọi MenuManager để thực thi hành động của nút hiện tại
             // Không cần reset trigger vì nó tự động reset trong Animator
             menuManager.ExecuteCurrentButtonAction();
