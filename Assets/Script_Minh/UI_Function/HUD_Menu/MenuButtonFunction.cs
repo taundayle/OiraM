@@ -27,6 +27,7 @@ namespace Script_Minh.Input_System
             return buttonType;
         }
 
+        #region Xử lý nút bằng chuột
         // Xử lý khi chuột hover vào button
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -49,6 +50,18 @@ namespace Script_Minh.Input_System
             // Bắt đầu coroutine để chạy animation và thực thi hành động
             StartCoroutine(ExecuteButtonActionWithAnimation());
         }
+        #endregion
+
+        #region Xử lý nút bằng phím hoặc tay cầm
+        public void TriggerButtonBySubmit()
+        {
+            // Chỉ thực hiện nếu button này đang được chọn
+            if (menuManager.currentSelectedButton == buttonType)
+            {
+                StartCoroutine(ExecuteButtonActionWithAnimation());
+            }
+        }
+        #endregion
 
         // Coroutine để chạy animation và thực thi hành động
         private IEnumerator ExecuteButtonActionWithAnimation()

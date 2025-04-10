@@ -1,17 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Script_Minh.Input_System
+namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì phải thay đổi lại đúng địa chỉ
 {
     public class MenuManager : MonoBehaviour
     {
+        #region Khai báo biến của từng chức năng nút
         [SerializeField] int nextSceneIndex = 1;
-        public enum MenuButtonType { NewGame, Quit }
-        private System.Collections.Generic.Dictionary<MenuButtonType, System.Action> buttonActions = new System.Collections.Generic.Dictionary<MenuButtonType, System.Action>();
-        [SerializeField] public MenuButtonType currentSelectedButton = MenuButtonType.NewGame;
-        private MenuInputHandler inputHandler;
+        public enum MenuButtonType  // phát triển thêm chức năng ở đây
+        { NewGame, Countinue, Quit }
 
+        private Dictionary<MenuButtonType, Action> buttonActions = new Dictionary<MenuButtonType, 
+                    Action>();
+        
+        [SerializeField] public MenuButtonType currentSelectedButton = MenuButtonType.NewGame;
+        
+        private MenuInputHandler inputHandler;
+        #endregion
+
+        #region Setup chức năng nút
         void Start()
         {
             InitializeButtonActions();
@@ -28,16 +37,26 @@ namespace Script_Minh.Input_System
             inputHandler.playerInput.CharacterInput.Cancel.performed += context => HandleCancel();
         }
 
+        // Khai báo chức năng cần làm trong MenuManager (quan trọng)
         void InitializeButtonActions()
         {
             buttonActions[MenuButtonType.NewGame] = HandleNewGame;
+            buttonActions[MenuButtonType.Countinue] = HandleCountinueGame;
             buttonActions[MenuButtonType.Quit] = HandleQuitGame;
         }
+        #endregion
+
+        #region Các chức năng nút (có thể phát triển các chức năng sau này)
 
         void HandleNewGame()
         {
             Debug.Log("Starting New Game");
             UnityEngine.SceneManagement.SceneManager.LoadScene(nextSceneIndex);
+        }
+
+        void HandleCountinueGame()
+        {
+            Debug.Log("Countinue Game");
         }
 
         void HandleQuitGame()
@@ -49,7 +68,9 @@ namespace Script_Minh.Input_System
             Application.Quit();
 #endif
         }
+        #endregion
 
+        #region Logic hoạt động nút trong menu
         private void HandleUIInput(InputAction.CallbackContext context)
         {
             Vector2 input = context.ReadValue<Vector2>();
@@ -65,7 +86,18 @@ namespace Script_Minh.Input_System
 
         private void HandleSubmit()
         {
-            ExecuteCurrentButtonAction();
+            // Tìm tất cả các nút hiện có trong scene
+            var buttons = FindObjectsOfType<MenuButtonFunction>();
+
+            // Gọi trigger tương ứng với nút đang được chọn
+            foreach (var button in buttons)
+            {
+                if (button.GetButtonType() == currentSelectedButton)
+                {
+                    button.TriggerButtonBySubmit();
+                    break;
+                }
+            }
         }
 
         private void HandleCancel()
@@ -76,12 +108,16 @@ namespace Script_Minh.Input_System
 
         MenuButtonType GetNextButton()
         {
-            return currentSelectedButton == MenuButtonType.NewGame ? MenuButtonType.Quit : MenuButtonType.NewGame;
+            int nextIndex = ((int)currentSelectedButton + 1) % 
+                Enum.GetNames(typeof(MenuButtonType)).Length;
+            return (MenuButtonType)nextIndex;
         }
 
         MenuButtonType GetPreviousButton()
         {
-            return currentSelectedButton == MenuButtonType.Quit ? MenuButtonType.NewGame : MenuButtonType.Quit;
+            int totalButtons = System.Enum.GetNames(typeof(MenuButtonType)).Length;
+            int prevIndex = ((int)currentSelectedButton - 1 + totalButtons) % totalButtons;
+            return (MenuButtonType)prevIndex;
         }
 
         public void ExecuteCurrentButtonAction()
@@ -102,5 +138,6 @@ namespace Script_Minh.Input_System
                 inputHandler.playerInput.CharacterInput.Cancel.performed -= context => HandleCancel();
             }
         }
+        #endregion
     }
 }
