@@ -10,7 +10,7 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
         #region Khai báo biến của từng chức năng nút
         [SerializeField] int nextSceneIndex = 1;
         public enum MenuButtonType  // phát triển thêm chức năng ở đây
-        { NewGame, Countinue, Quit }
+        { NewGame, Countinue, Settings, Quit }
 
         private Dictionary<MenuButtonType, Action> buttonActions = new Dictionary<MenuButtonType, 
                     Action>();
@@ -42,6 +42,7 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
         {
             buttonActions[MenuButtonType.NewGame] = HandleNewGame;
             buttonActions[MenuButtonType.Countinue] = HandleCountinueGame;
+            buttonActions[MenuButtonType.Settings] = HandleSettingGame;
             buttonActions[MenuButtonType.Quit] = HandleQuitGame;
         }
         #endregion
@@ -57,6 +58,11 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
         void HandleCountinueGame()
         {
             Debug.Log("Countinue Game");
+        }
+
+        void HandleSettingGame()
+        {
+            Debug.Log("Settings Game");
         }
 
         void HandleQuitGame()
