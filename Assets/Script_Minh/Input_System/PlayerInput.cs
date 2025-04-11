@@ -100,6 +100,15 @@ namespace Script_Minh.Input_System
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SettingTab"",
+                    ""type"": ""Value"",
+                    ""id"": ""733c0b5b-699a-4cba-ac18-a709ffc6c11e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -443,6 +452,116 @@ namespace Script_Minh.Input_System
                     ""action"": ""LockOn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""f8f09af1-8bca-4fc0-a854-81727615f85d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SettingTab"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""2c8a7adb-3577-48e9-80ab-7a5cd5fb53d5"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";InputType"",
+                    ""action"": ""SettingTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""700b21ae-31c5-433f-9f57-1d12f7f0b963"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";InputType"",
+                    ""action"": ""SettingTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a1f6b8cf-a797-48c4-8600-9b64c4d4e1a4"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";InputType"",
+                    ""action"": ""SettingTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""5342b6f7-2b7b-486e-9149-0f677b405095"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";InputType"",
+                    ""action"": ""SettingTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""7d567fbc-7b45-41b4-b755-0e819435060f"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""SettingTab"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c4b5379a-a5ed-4b1f-baa6-386fe8e578b6"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";InputType"",
+                    ""action"": ""SettingTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a3ece9d6-175b-4c07-9046-4630cc51ed8c"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";InputType"",
+                    ""action"": ""SettingTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""1e514ad8-f607-407a-8903-e18970364b45"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";InputType"",
+                    ""action"": ""SettingTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""11ff11d1-0a97-4c98-b184-8df8496d2102"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";InputType"",
+                    ""action"": ""SettingTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -481,6 +600,7 @@ namespace Script_Minh.Input_System
             m_CharacterInput_Cancel = m_CharacterInput.FindAction("Cancel", throwIfNotFound: true);
             m_CharacterInput_Setting = m_CharacterInput.FindAction("Setting", throwIfNotFound: true);
             m_CharacterInput_LockOn = m_CharacterInput.FindAction("LockOn", throwIfNotFound: true);
+            m_CharacterInput_SettingTab = m_CharacterInput.FindAction("SettingTab", throwIfNotFound: true);
         }
 
         ~@PlayerInput()
@@ -555,6 +675,7 @@ namespace Script_Minh.Input_System
         private readonly InputAction m_CharacterInput_Cancel;
         private readonly InputAction m_CharacterInput_Setting;
         private readonly InputAction m_CharacterInput_LockOn;
+        private readonly InputAction m_CharacterInput_SettingTab;
         public struct CharacterInputActions
         {
             private @PlayerInput m_Wrapper;
@@ -567,6 +688,7 @@ namespace Script_Minh.Input_System
             public InputAction @Cancel => m_Wrapper.m_CharacterInput_Cancel;
             public InputAction @Setting => m_Wrapper.m_CharacterInput_Setting;
             public InputAction @LockOn => m_Wrapper.m_CharacterInput_LockOn;
+            public InputAction @SettingTab => m_Wrapper.m_CharacterInput_SettingTab;
             public InputActionMap Get() { return m_Wrapper.m_CharacterInput; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -600,6 +722,9 @@ namespace Script_Minh.Input_System
                 @LockOn.started += instance.OnLockOn;
                 @LockOn.performed += instance.OnLockOn;
                 @LockOn.canceled += instance.OnLockOn;
+                @SettingTab.started += instance.OnSettingTab;
+                @SettingTab.performed += instance.OnSettingTab;
+                @SettingTab.canceled += instance.OnSettingTab;
             }
 
             private void UnregisterCallbacks(ICharacterInputActions instance)
@@ -628,6 +753,9 @@ namespace Script_Minh.Input_System
                 @LockOn.started -= instance.OnLockOn;
                 @LockOn.performed -= instance.OnLockOn;
                 @LockOn.canceled -= instance.OnLockOn;
+                @SettingTab.started -= instance.OnSettingTab;
+                @SettingTab.performed -= instance.OnSettingTab;
+                @SettingTab.canceled -= instance.OnSettingTab;
             }
 
             public void RemoveCallbacks(ICharacterInputActions instance)
@@ -664,6 +792,7 @@ namespace Script_Minh.Input_System
             void OnCancel(InputAction.CallbackContext context);
             void OnSetting(InputAction.CallbackContext context);
             void OnLockOn(InputAction.CallbackContext context);
+            void OnSettingTab(InputAction.CallbackContext context);
         }
     }
 }

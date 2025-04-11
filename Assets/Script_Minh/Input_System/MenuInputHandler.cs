@@ -5,6 +5,7 @@ namespace Script_Minh.Input_System
 {
     public class MenuInputHandler : MonoBehaviour, PlayerInput.ICharacterInputActions
     {
+        #region Biến khai báo
         // Làm public để các script khác có thể truy cập
         public PlayerInput playerInput { get; private set; }
 
@@ -14,7 +15,9 @@ namespace Script_Minh.Input_System
         public Vector2 moveInput { get; private set; }
         public Vector2 lookInput { get; private set; }
         public bool isSprinting { get; private set; }
+        #endregion
 
+        #region Setup Input System
         private void Awake()
         {
             playerInput = new PlayerInput();
@@ -30,6 +33,9 @@ namespace Script_Minh.Input_System
         {
             playerInput.CharacterInput.Disable();
         }
+        #endregion
+
+        #region Hàm truy cập Input Actions (Phát triển về sau)
 
         // Explicit interface implementation
         void PlayerInput.ICharacterInputActions.OnLook(InputAction.CallbackContext context)
@@ -76,6 +82,11 @@ namespace Script_Minh.Input_System
             // Implement if needed
         }
 
+        void PlayerInput.ICharacterInputActions.OnSettingTab(InputAction.CallbackContext context)
+        {
+            // Implement if needed
+        }
+
         void PlayerInput.ICharacterInputActions.OnLockOn(InputAction.CallbackContext context)
         {
             // Kích hoạt sự kiện khi "LockOn" được nhấn
@@ -84,5 +95,6 @@ namespace Script_Minh.Input_System
                 OnLockOnTriggered?.Invoke();
             }
         }
+        #endregion
     }
 }

@@ -58,11 +58,29 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
         void HandleCountinueGame()
         {
             Debug.Log("Countinue Game");
+
+            if (SettingManager.Instance != null)
+            {
+                SettingManager.Instance.CloseSettings();
+            }
+            else
+            {
+                Debug.LogError("SettingManager instance not found!");
+            }
         }
 
         void HandleSettingGame()
         {
             Debug.Log("Settings Game");
+
+            if (SettingManager.Instance != null)
+            {
+                SettingManager.Instance.OpenSettings();
+            }
+            else
+            {
+                Debug.LogError("SettingManager instance not found!");
+            }
         }
 
         void HandleQuitGame()
