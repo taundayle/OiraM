@@ -29,7 +29,6 @@ public class SettingManager : MonoBehaviour
     {
         if (_settingGroup == null)
         {
-            Debug.LogError("CanvasGroup component not found on _settingMenu!");
             _settingGroup = GetComponent<CanvasGroup>();
         }
         _settingGroup.alpha = 0;
