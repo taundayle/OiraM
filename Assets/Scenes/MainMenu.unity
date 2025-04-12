@@ -3522,6 +3522,7 @@ GameObject:
   - component: {fileID: 849603965}
   - component: {fileID: 849603967}
   - component: {fileID: 849603966}
+  - component: {fileID: 849603968}
   m_Layer: 5
   m_Name: PressAnyKey
   m_TagString: Untagged
@@ -3579,10 +3580,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be9cc69832ae8241a9899f82c90f931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _anyKeyButton: {fileID: 849603962}
-  _mainMenu: {fileID: 1913008581}
+  _anyKeyButtonGroup: {fileID: 849603968}
+  _mainStartButtonGroup: {fileID: 1913008586}
   _menuManager: {fileID: 1913008583}
-  _mainMenuScene: {fileID: 394855076}
+  _groupMainMenu: {fileID: 394855076}
   fadeDuration: 7
 --- !u!114 &849603966
 MonoBehaviour:
@@ -3626,6 +3627,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94977df0d90b8ea46be32600d9eceb67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &849603968
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849603962}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &849989356
 GameObject:
   m_ObjectHideFlags: 0
@@ -7892,13 +7905,14 @@ GameObject:
   - component: {fileID: 1913008583}
   - component: {fileID: 1913008585}
   - component: {fileID: 1913008584}
+  - component: {fileID: 1913008586}
   m_Layer: 5
   m_Name: Menu_Start_Function
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1913008582
 Transform:
   m_ObjectHideFlags: 0
@@ -7974,6 +7988,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94977df0d90b8ea46be32600d9eceb67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1913008586
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913008581}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1933622493
 GameObject:
   m_ObjectHideFlags: 0
@@ -8170,7 +8196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea497beeee831b04d9574f74eca00234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settingMenu: {fileID: 1982884096}
   fadeInDuration: 0.25
   fadeOutDuration: 0.15
 --- !u!1 &1984892891

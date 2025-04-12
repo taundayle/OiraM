@@ -5,10 +5,10 @@ namespace Script_Minh.Input_System
 {
     public class AnyKeyButton : MonoBehaviour
     {
-        [SerializeField] private GameObject _anyKeyButton;
-        [SerializeField] private GameObject _mainMenu;
+        [SerializeField] private CanvasGroup _anyKeyButtonGroup;
+        [SerializeField] private CanvasGroup _mainStartButtonGroup;
         [SerializeField] MenuManager _menuManager;
-        [SerializeField] CanvasGroup _mainMenuScene;
+        [SerializeField] private CanvasGroup _groupMainMenu;
         [SerializeField] private float fadeDuration = 7f;
 
         Animator _animator;
@@ -19,10 +19,18 @@ namespace Script_Minh.Input_System
         void Start()
         {
             _animator = GetComponent<Animator>();
-            _anyKeyButton.SetActive(true);
-            _mainMenu.SetActive(false);
+
+            // Sử dụng CanvasGroup thay vì SetActive
+            _anyKeyButtonGroup.alpha = 1;
+            _anyKeyButtonGroup.interactable = true;
+            _anyKeyButtonGroup.blocksRaycasts = true;
+
+            _mainStartButtonGroup.alpha = 0;
+            _mainStartButtonGroup.interactable = false;
+            _mainStartButtonGroup.blocksRaycasts = false;
+
             _menuManager.enabled = false;
-            _mainMenuScene.alpha = 0;
+            _groupMainMenu.alpha = 0;
 
             inputHandler = FindObjectOfType<MenuInputHandler>();
             if (inputHandler != null)
@@ -44,9 +52,10 @@ namespace Script_Minh.Input_System
         void Update()
         {
             // Chỉ cho phép nhấn phím khi fade hoàn tất (alpha = 1) và không đang fade
-            if (_mainMenuScene.alpha < 1 || isFading) return;
+            if (_groupMainMenu.alpha < 1 || isFading) return;
 
-            if (_anyKeyButton.activeSelf)
+            // Kiểm tra alpha của AnyKeyButton thay vì activeSelf
+            if (_anyKeyButtonGroup.alpha > 0)
             {
                 if (Input.anyKeyDown)
                 {
@@ -63,11 +72,11 @@ namespace Script_Minh.Input_System
             while (elapsedTime < fadeDuration)
             {
                 elapsedTime += Time.deltaTime;
-                _mainMenuScene.alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
+                _groupMainMenu.alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
                 yield return null;
             }
 
-            _mainMenuScene.alpha = 1f;
+            _groupMainMenu.alpha = 1f;
             isFading = false;
         }
 
@@ -77,7 +86,7 @@ namespace Script_Minh.Input_System
             {
                 StopCoroutine(fadeCoroutine);
             }
-            _mainMenuScene.alpha = 1f;
+            _groupMainMenu.alpha = 1f;
             isFading = false;
         }
 
@@ -85,8 +94,16 @@ namespace Script_Minh.Input_System
         {
             _animator.SetTrigger("anyKey");
             yield return new WaitForSeconds(1.31f);
-            _anyKeyButton.SetActive(false);
-            _mainMenu.SetActive(true);
+
+            // Sử dụng CanvasGroup để ẩn/hiện
+            _anyKeyButtonGroup.alpha = 0;
+            _anyKeyButtonGroup.interactable = false;
+            _anyKeyButtonGroup.blocksRaycasts = false;
+
+            _mainStartButtonGroup.alpha = 1;
+            _mainStartButtonGroup.interactable = true;
+            _mainStartButtonGroup.blocksRaycasts = true;
+
             _menuManager.enabled = true;
         }
     }

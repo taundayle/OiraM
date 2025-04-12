@@ -6,7 +6,6 @@ public class SettingManager : MonoBehaviour
     public static SettingManager Instance { get; private set; }
 
     #region Biến khai báo
-    [SerializeField] private GameObject _settingMenu;
     private CanvasGroup _settingGroup;
 
     [SerializeField] private float fadeInDuration = 0.25f; // Thời gian để fade-in hoàn tất (giây)
@@ -28,30 +27,32 @@ public class SettingManager : MonoBehaviour
 
     void Start()
     {
-        _settingGroup = _settingMenu.GetComponent<CanvasGroup>();
         if (_settingGroup == null)
         {
             Debug.LogError("CanvasGroup component not found on _settingMenu!");
+            _settingGroup = GetComponent<CanvasGroup>();
         }
         _settingGroup.alpha = 0;
-        _settingGroup.enabled = false;
+        _settingGroup.enabled = true;
+        _settingGroup.interactable = false;
+        _settingGroup.blocksRaycasts = false;
 
-        _settingMenu.SetActive(false);
     }
     #endregion
 
     #region Hàm công khai
     public void OpenSettings()
     {
-        _settingMenu.SetActive(true);
-        _settingGroup.enabled = true;
         StartCoroutine(FadeIn());
+        _settingGroup.interactable = true;
+        _settingGroup.blocksRaycasts = true;
     }
 
     public void CloseSettings()
     {
-        _settingGroup.enabled = true; // Đảm bảo CanvasGroup enabled để thay đổi alpha
         StartCoroutine(FadeOut());
+        _settingGroup.interactable = false;
+        _settingGroup.blocksRaycasts = false;
     }
     #endregion
 
@@ -88,8 +89,6 @@ public class SettingManager : MonoBehaviour
         }
 
         _settingGroup.alpha = endAlpha; // Đảm bảo alpha đạt giá trị cuối
-        _settingGroup.enabled = false;  // Tắt CanvasGroup
-        _settingMenu.SetActive(false);  // Deactivate GameObject sau khi fade-out hoàn tất
     }
     #endregion
 }
