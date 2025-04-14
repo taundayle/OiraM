@@ -16,6 +16,9 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
                     Action>();
         
         [SerializeField] public MenuButtonType currentSelectedButton = MenuButtonType.NewGame;
+
+        [Header("Group Start Menu")]
+        public CanvasGroup _startMenuGroup;
         
         private MenuInputHandler inputHandler;
         #endregion
@@ -58,15 +61,6 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
         void HandleCountinueGame()
         {
             Debug.Log("Countinue Game");
-
-            if (SettingManager.Instance != null)
-            {
-                SettingManager.Instance.CloseSettings();
-            }
-            else
-            {
-                Debug.LogError("SettingManager instance not found!");
-            }
         }
 
         void HandleSettingGame()
@@ -75,6 +69,11 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
 
             if (SettingManager.Instance != null)
             {
+                _startMenuGroup.alpha = 0f;
+                _startMenuGroup.blocksRaycasts = false;
+                _startMenuGroup.interactable = false;
+                inputHandler.enabled = false;
+
                 SettingManager.Instance.OpenSettings();
             }
             else
