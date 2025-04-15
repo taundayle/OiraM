@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Script.Input_System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,7 +16,14 @@ public class GeneralSetting : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
 
     [SerializeField] private Button saveButton;
+
+    [SerializeField] CanvasGroup _saveGroup;
+    [SerializeField] Button _saveButton;
+    [SerializeField] Button _cancelButton;
+
     [SerializeField] private Button defaultButton;
+
+    private MenuManager menuManager;
 
     void Start()
     {
@@ -28,14 +36,20 @@ public class GeneralSetting : MonoBehaviour
         fullScreenDropdown.onValueChanged.AddListener(delegate { ApplyDisplaySettings(); });
 
         // Thêm sự kiện cho các nút
-        saveButton.onClick.AddListener(SaveSettings);
+        saveButton.onClick.AddListener(ShowNoticeSaveSettings);
+        _saveButton.onClick.AddListener(SaveAndHide);
+        _cancelButton.onClick.AddListener(HideNoticeSaveSettings);
         defaultButton.onClick.AddListener(SetDefaultSettings);
+
+        // Ban đầu ẩn _saveGroup
+        _saveGroup.alpha = 0;
+        _saveGroup.interactable = false;
+        _saveGroup.blocksRaycasts = false;
     }
 
     // Tải cài đặt từ PlayerPrefs
     void LoadSettings()
     {
-        // Tải chỉ số độ phân giải
         if (PlayerPrefs.HasKey("resolutionIndex"))
         {
             int index = PlayerPrefs.GetInt("resolutionIndex");
@@ -46,7 +60,6 @@ public class GeneralSetting : MonoBehaviour
             resolutionDropdown.value = 2; // Mặc định là 1920 x 1080
         }
 
-        // Tải chỉ số chế độ toàn màn hình
         if (PlayerPrefs.HasKey("fullScreenIndex"))
         {
             int index = PlayerPrefs.GetInt("fullScreenIndex");
@@ -64,32 +77,36 @@ public class GeneralSetting : MonoBehaviour
         int resolutionIndex = resolutionDropdown.value;
         int fullScreenIndex = fullScreenDropdown.value;
 
-        // Xác định chế độ toàn màn hình
-        FullScreenMode mode = fullScreenIndex == 0 ? FullScreenMode.FullScreenWindow : 
-            FullScreenMode.Windowed;
+        FullScreenMode mode = fullScreenIndex == 0 ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
 
-        // Áp dụng độ phân giải dựa trên chỉ số
         switch (resolutionIndex)
         {
-            case 0:
-                Screen.SetResolution(3840, 2160, mode);
-                break;
-            case 1:
-                Screen.SetResolution(2560, 1440, mode);
-                break;
-            case 2:
-                Screen.SetResolution(1920, 1080, mode);
-                break;
-            case 3:
-                Screen.SetResolution(1366, 768, mode);
-                break;
-            case 4:
-                Screen.SetResolution(1280, 720, mode);
-                break;
-            case 5:
-                Screen.SetResolution(800, 600, mode);
-                break;
+            case 0: Screen.SetResolution(3840, 2160, mode); break;
+            case 1: Screen.SetResolution(2560, 1440, mode); break;
+            case 2: Screen.SetResolution(1920, 1080, mode); break;
+            case 3: Screen.SetResolution(1366, 768, mode); break;
+            case 4: Screen.SetResolution(1280, 720, mode); break;
+            case 5: Screen.SetResolution(800, 600, mode); break;
         }
+    }
+
+    // Hiển thị hộp thoại lưu cài đặt
+    void ShowNoticeSaveSettings()
+    {
+        StartCoroutine(FadeIn(_saveGroup, 0.15f));
+    }
+
+    // Ẩn hộp thoại lưu cài đặt
+    void HideNoticeSaveSettings()
+    {
+        StartCoroutine(FadeOut(_saveGroup, 0.15f));
+    }
+
+    // Lưu cài đặt và ẩn hộp thoại
+    void SaveAndHide()
+    {
+        SaveSettings();
+        HideNoticeSaveSettings();
     }
 
     // Lưu cài đặt vào PlayerPrefs
@@ -108,15 +125,47 @@ public class GeneralSetting : MonoBehaviour
     // Đặt về cài đặt mặc định
     void SetDefaultSettings()
     {
-        // Đặt dropdown về giá trị mặc định
         resolutionDropdown.value = 2; // 1920 x 1080
         fullScreenDropdown.value = 0; // Fullscreen
-
-        // Áp dụng cài đặt mặc định
         ApplyDisplaySettings();
     }
 
-    // Update is called once per frame
+    // Coroutine để hiện dần CanvasGroup
+    IEnumerator FadeIn(CanvasGroup group, float duration)
+    {
+        float startAlpha = group.alpha;
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            group.alpha = Mathf.Lerp(startAlpha, 1, time / duration);
+            yield return null;
+        }
+
+        group.alpha = 1;
+        group.interactable = true;
+        group.blocksRaycasts = true;
+    }
+
+    // Coroutine để ẩn dần CanvasGroup
+    IEnumerator FadeOut(CanvasGroup group, float duration)
+    {
+        float startAlpha = group.alpha;
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            group.alpha = Mathf.Lerp(startAlpha, 0, time / duration);
+            yield return null;
+        }
+
+        group.alpha = 0;
+        group.interactable = false;
+        group.blocksRaycasts = false;
+    }
+
     void Update()
     {
 
