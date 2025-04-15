@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì phải thay đổi lại đúng địa chỉ
+namespace Script.Input_System // Nếu thay đổi địa chỉ tệp thì phải thay đổi lại đúng địa chỉ
 {
     public class MenuManager : MonoBehaviour
     {

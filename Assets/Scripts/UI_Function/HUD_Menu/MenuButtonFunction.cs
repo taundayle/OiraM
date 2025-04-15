@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 
-namespace Script_Minh.Input_System
+namespace Script.Input_System
 {
     public class MenuButtonFunction : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     {

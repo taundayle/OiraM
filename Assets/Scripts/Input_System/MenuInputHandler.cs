@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Script_Minh.Input_System
+namespace Script.Input_System
 {
     public class MenuInputHandler : MonoBehaviour, PlayerInput.ICharacterInputActions
     {

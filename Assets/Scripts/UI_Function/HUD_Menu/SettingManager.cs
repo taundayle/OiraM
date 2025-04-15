@@ -1,4 +1,4 @@
-﻿using Script_Minh.Input_System;
+﻿using Script.Input_System;
 using System.Collections;
 using UnityEngine;
 
@@ -126,6 +126,8 @@ public class SettingManager : MonoBehaviour
         _startMenuGroup.interactable = true;
 
         menuManager.EnableInput();
+
+        isOpen = false;
     }
     #endregion
 }

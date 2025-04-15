@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-namespace Script_Minh.Input_System
+namespace Script.Input_System
 {
     public class LogoIntro : MonoBehaviour
     {
