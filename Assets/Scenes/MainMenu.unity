@@ -8566,7 +8566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa6b26a3de072847a523bbbf1a3a678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneIndex: 0
+  nextSceneIndex: 2
   currentSelectedButton: 0
   _startMenuGroup: {fileID: 1913008586}
 --- !u!114 &1913008584
