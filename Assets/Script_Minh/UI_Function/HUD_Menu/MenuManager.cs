@@ -37,7 +37,6 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
             // Đăng ký các sự kiện từ InputHandler
             inputHandler.playerInput.CharacterInput.UI_Button.performed += HandleUIInput;
             inputHandler.playerInput.CharacterInput.Submit.performed += context => HandleSubmit();
-            inputHandler.playerInput.CharacterInput.Cancel.performed += context => HandleCancel();
         }
 
         // Khai báo chức năng cần làm trong MenuManager (quan trọng)
@@ -47,6 +46,11 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
             buttonActions[MenuButtonType.Countinue] = HandleCountinueGame;
             buttonActions[MenuButtonType.Settings] = HandleSettingGame;
             buttonActions[MenuButtonType.Quit] = HandleQuitGame;
+        }
+
+        public void EnableInput()
+        {
+            inputHandler.enabled = true;
         }
         #endregion
 
@@ -123,12 +127,6 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
             }
         }
 
-        private void HandleCancel()
-        {
-            Debug.Log("Cancel action triggered");
-            // Thêm logic thoát menu hoặc hủy thao tác tại đây
-        }
-
         MenuButtonType GetNextButton()
         {
             int nextIndex = ((int)currentSelectedButton + 1) % 
@@ -158,7 +156,6 @@ namespace Script_Minh.Input_System // Nếu thay đổi địa chỉ tệp thì 
                 // Hủy đăng ký các sự kiện khi component bị hủy
                 inputHandler.playerInput.CharacterInput.UI_Button.performed -= HandleUIInput;
                 inputHandler.playerInput.CharacterInput.Submit.performed -= context => HandleSubmit();
-                inputHandler.playerInput.CharacterInput.Cancel.performed -= context => HandleCancel();
             }
         }
         #endregion

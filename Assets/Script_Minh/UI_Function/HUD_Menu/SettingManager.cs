@@ -1,9 +1,14 @@
-﻿using System.Collections;
+﻿using Script_Minh.Input_System;
+using System.Collections;
 using UnityEngine;
 
 public class SettingManager : MonoBehaviour
 {
     public static SettingManager Instance { get; private set; }
+    public CanvasGroup _startMenuGroup;
+    public MenuManager menuManager;
+
+    public bool isOpen;
 
     #region Biến khai báo
     private CanvasGroup _settingGroup;
@@ -11,6 +16,8 @@ public class SettingManager : MonoBehaviour
     [SerializeField] private float fadeInDuration = 0.25f; // Thời gian để fade-in hoàn tất (giây)
     [SerializeField] private float fadeOutDuration = 0.1f; // Thời gian để fade-out hoàn tất (giây)
     #endregion
+
+    private MenuInputHandler _menuInputHandler;
 
     #region Singleton Pattern (Setup trên Start)
     void Awake()
@@ -36,6 +43,20 @@ public class SettingManager : MonoBehaviour
         _settingGroup.interactable = false;
         _settingGroup.blocksRaycasts = false;
 
+        _menuInputHandler = GetComponent<MenuInputHandler>();
+        _menuInputHandler.playerInput.CharacterInput.Cancel.performed += context => HandleCancel();
+    }
+
+    private void HandleCancel()
+    {
+        Debug.Log("Cancel action triggered");
+
+        StartCoroutine(FadeOut());
+    }
+
+    private void OnDestroy()
+    {
+        _menuInputHandler.playerInput.CharacterInput.Cancel.performed -= context => HandleCancel();
     }
     #endregion
 
@@ -45,6 +66,9 @@ public class SettingManager : MonoBehaviour
         StartCoroutine(FadeIn());
         _settingGroup.interactable = true;
         _settingGroup.blocksRaycasts = true;
+        _menuInputHandler.enabled = true;
+
+        isOpen = true;
     }
 
     public void CloseSettings()
@@ -52,6 +76,8 @@ public class SettingManager : MonoBehaviour
         StartCoroutine(FadeOut());
         _settingGroup.interactable = false;
         _settingGroup.blocksRaycasts = false;
+
+        isOpen = false;
     }
     #endregion
 
@@ -88,6 +114,18 @@ public class SettingManager : MonoBehaviour
         }
 
         _settingGroup.alpha = endAlpha; // Đảm bảo alpha đạt giá trị cuối
+
+        _settingGroup.alpha = 0;
+        _settingGroup.enabled = true;
+        _settingGroup.interactable = false;
+        _settingGroup.blocksRaycasts = false;
+        _menuInputHandler.enabled = false;
+
+        _startMenuGroup.alpha = 1f;
+        _startMenuGroup.blocksRaycasts = true;
+        _startMenuGroup.interactable = true;
+
+        menuManager.EnableInput();
     }
     #endregion
 }
