@@ -10,6 +10,8 @@ namespace Script.Input_System
         [SerializeField] MenuManager _menuManager;
         [SerializeField] private CanvasGroup _groupMainMenu;
         [SerializeField] private float fadeDuration = 7f;
+        [SerializeField] private AudioSource anyKeySound;
+        
 
         Animator _animator;
         private bool isFading = false;
@@ -93,6 +95,7 @@ namespace Script.Input_System
         IEnumerator ShowMenuFunction()
         {
             _animator.SetTrigger("anyKey");
+            anyKeySound.Play();
             yield return new WaitForSeconds(1.31f);
 
             // Sử dụng CanvasGroup để ẩn/hiện
