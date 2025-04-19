@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,7 +9,7 @@ namespace Script.Input_System // Nếu thay đổi địa chỉ tệp thì phả
     public class MenuManager : MonoBehaviour
     {
         #region Khai báo biến của từng chức năng nút
-        [SerializeField] int nextSceneIndex = 1;
+        [SerializeField] int nextSceneIndex = 2;
         public enum MenuButtonType  // phát triển thêm chức năng ở đây
         { NewGame, Countinue, Settings, Quit }
 
@@ -19,6 +20,10 @@ namespace Script.Input_System // Nếu thay đổi địa chỉ tệp thì phả
 
         [Header("Group Start Menu")]
         public CanvasGroup _startMenuGroup;
+
+        [Header("Group All Main Menu")]
+        public CanvasGroup _mainMenuGroup;
+        public float fadeOutDuration = 0.15f;
         
         private MenuInputHandler inputHandler;
         #endregion
@@ -59,6 +64,15 @@ namespace Script.Input_System // Nếu thay đổi địa chỉ tệp thì phả
         void HandleNewGame()
         {
             Debug.Log("Starting New Game");
+            StartCoroutine(NewGameSequence());
+        }
+
+        IEnumerator NewGameSequence()
+        {
+            // Start the fade out animation
+            yield return StartCoroutine(FadeOutGroup());
+
+            // After fade out is complete, load the next scene
             UnityEngine.SceneManagement.SceneManager.LoadScene(nextSceneIndex);
         }
 
@@ -158,6 +172,27 @@ namespace Script.Input_System // Nếu thay đổi địa chỉ tệp thì phả
                 inputHandler.playerInput.CharacterInput.Submit.performed -= context => HandleSubmit();
             }
         }
+        #endregion
+
+        #region Fade Out CanvasGroup
+
+        IEnumerator FadeOutGroup()
+        {
+            float startAlpha = _mainMenuGroup.alpha; // Lấy alpha hiện tại
+            float endAlpha = 0f;
+            float elapsed = 0f;
+
+            while (elapsed < fadeOutDuration)
+            {
+                elapsed += Time.deltaTime;
+                float alpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / fadeOutDuration);
+                _mainMenuGroup.alpha = alpha;
+                yield return null;
+            }
+
+            _mainMenuGroup.alpha = endAlpha; // Đảm bảo alpha đạt giá trị cuối
+        }
+
         #endregion
     }
 }

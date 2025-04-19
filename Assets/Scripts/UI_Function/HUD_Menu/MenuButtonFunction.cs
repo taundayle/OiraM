@@ -10,6 +10,7 @@ namespace Script.Input_System
         [SerializeField] private Animator animator;       // Animator để xử lý animation
         [SerializeField] private MenuManager.MenuButtonType buttonType; // Loại nút (NewGame, Quit, v.v.)
         [SerializeField] private float durationAnimation = 0.35f;       // Thời gian animation
+        [SerializeField] private AudioSource selectSound;             // Âm thanh khi chọn nút
 
         void Update()
         {
@@ -71,6 +72,9 @@ namespace Script.Input_System
             {
                 animator.SetTrigger("Pressed");
             }
+
+            // Phát âm thanh press (nếu có AudioManager)
+            selectSound.PlayOneShot(selectSound.clip);
 
             // Đợi thời gian animation hoàn thành
             yield return new WaitForSeconds(durationAnimation);

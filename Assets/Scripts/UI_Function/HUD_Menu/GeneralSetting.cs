@@ -34,6 +34,10 @@ public class GeneralSetting : MonoBehaviour
     public CanvasGroup _defaultGroup;
     [SerializeField] private Button _saveDefaultButton;
     [SerializeField] private Button _cancelDefaultButton;
+
+    [Header("Audio Elements")]
+    [SerializeField] private AudioSource okSound;
+    [SerializeField] private AudioSource cancelSound;
     
     private MenuManager menuManager;
     #endregion
@@ -216,6 +220,16 @@ public class GeneralSetting : MonoBehaviour
     {
         float volumeDB = (volume == 0) ? -80f : 20f * Mathf.Log10(volume / 10f);
         mixerAudio.SetFloat("sfxAudio", volumeDB);
+    }
+
+    public void OkSoundFX()
+    {
+        okSound.PlayOneShot(okSound.clip);
+    }
+
+    public void CancelSoundFX()
+    {
+        cancelSound.PlayOneShot(cancelSound.clip);
     }
 
     // Điều chỉnh lại ApplyAudioSettings

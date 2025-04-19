@@ -16,7 +16,9 @@ public class SettingManager : MonoBehaviour
     private CanvasGroup _settingGroup;
 
     [SerializeField] private float fadeInDuration = 0.25f; // Thời gian để fade-in hoàn tất (giây)
-    [SerializeField] private float fadeOutDuration = 0.1f; // Thời gian để fade-out hoàn tất (giây)
+    [SerializeField] private float fadeOutDuration = 0.2f; // Thời gian để fade-out hoàn tất (giây)
+
+    [SerializeField] private AudioSource cancelSound;
 
     private MenuInputHandler _menuInputHandler;
     #endregion
@@ -52,6 +54,8 @@ public class SettingManager : MonoBehaviour
     private void HandleCancel()
     {
         Debug.Log("Cancel action triggered");
+
+        cancelSound.PlayOneShot(cancelSound.clip);
 
         // Kiểm tra và ẩn các canvas group thông báo nếu đang hiển thị
         if (generalSetting._saveGroup.alpha > 0)
