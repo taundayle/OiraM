@@ -308,9 +308,9 @@ public class GeneralSetting : MonoBehaviour
         qualityDropdown.value = 2; // Medium
         languageDropdown.value = 0; // Tiếng Anh
 
-        volumeSlider.value = 8f; // 50% âm lượng master
-        musicSlider.value = 5f; // 50% âm lượng nhạc
-        sfxSlider.value = 5f; // 50% âm lượng SFX
+        volumeSlider.value = 10f; // âm lượng master
+        musicSlider.value = 7f; // âm lượng nhạc
+        sfxSlider.value = 7f; // âm lượng SFX
 
         ApplyDisplaySettings();
         ApplyQualitySettings();
