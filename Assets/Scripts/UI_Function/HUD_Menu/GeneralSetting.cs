@@ -25,13 +25,13 @@ public class GeneralSetting : MonoBehaviour
     [Header("Button Elements")]
     [SerializeField] private Button saveButtonGroup;
 
-    [SerializeField] CanvasGroup _saveGroup;
+    public CanvasGroup _saveGroup;
     [SerializeField] Button _saveButton;
     [SerializeField] Button _cancelButton;
 
     [SerializeField] private Button defaultButtonGroup;
 
-    [SerializeField] CanvasGroup _defaultGroup;
+    public CanvasGroup _defaultGroup;
     [SerializeField] private Button _saveDefaultButton;
     [SerializeField] private Button _cancelDefaultButton;
     
@@ -251,12 +251,12 @@ public class GeneralSetting : MonoBehaviour
     }
 
     // Ẩn hộp thoại lưu cài đặt
-    void HideNoticeSaveSettings()
+    public void HideNoticeSaveSettings()
     {
         StartCoroutine(FadeOut(_saveGroup, 0.15f));
     }
 
-    void HideNoticeDefaultSettings()
+    public void HideNoticeDefaultSettings()
     {
         StartCoroutine(FadeOut(_defaultGroup, 0.15f));
     }

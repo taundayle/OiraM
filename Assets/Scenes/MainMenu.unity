@@ -11394,6 +11394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startMenuGroup: {fileID: 1913008586}
   menuManager: {fileID: 1913008583}
+  generalSetting: {fileID: 1708199027}
   isOpen: 0
   fadeInDuration: 0.25
   fadeOutDuration: 0.15

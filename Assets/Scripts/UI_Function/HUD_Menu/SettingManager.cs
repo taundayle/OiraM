@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class SettingManager : MonoBehaviour
 {
+    #region Biến khai báo
     public static SettingManager Instance { get; private set; }
     public CanvasGroup _startMenuGroup;
     public MenuManager menuManager;
 
+    public GeneralSetting generalSetting; // Thêm tham chiếu này
+
     public bool isOpen;
 
-    #region Biến khai báo
     private CanvasGroup _settingGroup;
 
     [SerializeField] private float fadeInDuration = 0.25f; // Thời gian để fade-in hoàn tất (giây)
     [SerializeField] private float fadeOutDuration = 0.1f; // Thời gian để fade-out hoàn tất (giây)
-    #endregion
 
     private MenuInputHandler _menuInputHandler;
+    #endregion
 
     #region Singleton Pattern (Setup trên Start)
     void Awake()
@@ -51,6 +53,20 @@ public class SettingManager : MonoBehaviour
     {
         Debug.Log("Cancel action triggered");
 
+        // Kiểm tra và ẩn các canvas group thông báo nếu đang hiển thị
+        if (generalSetting._saveGroup.alpha > 0)
+        {
+            generalSetting.HideNoticeSaveSettings();
+            return;
+        }
+
+        if (generalSetting._defaultGroup.alpha > 0)
+        {
+            generalSetting.HideNoticeDefaultSettings();
+            return;
+        }
+
+        // Nếu không có thông báo nào đang hiển thị thì mới thực hiện fade out settings
         StartCoroutine(FadeOut());
     }
 
