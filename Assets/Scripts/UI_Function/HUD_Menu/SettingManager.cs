@@ -1,24 +1,46 @@
 ﻿using Script.Input_System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingManager : MonoBehaviour
 {
     #region Biến khai báo
     public static SettingManager Instance { get; private set; }
+
+    [Header("Main Menu")]
     public CanvasGroup _startMenuGroup;
     public MenuManager menuManager;
 
+    [Header("Setting General")]
     public GeneralSetting generalSetting; // Thêm tham chiếu này
+    public CanvasGroup generalSettingGroup;
+    public GameObject generalSettingCanvas;
 
+    public Button generalSettingButton;
+
+    [Header("Setting Input")]
+    public InputSetting inputSetting;
+    public CanvasGroup inputSettingGroup;
+    public GameObject inputSettingCanvas;
+
+    public Button inputSettingButton;
+
+    [Header("Setting Check")]
     public bool isOpen;
 
     private CanvasGroup _settingGroup;
 
+    [Header("Setting Animation")]
     [SerializeField] private float fadeInDuration = 0.25f; // Thời gian để fade-in hoàn tất (giây)
     [SerializeField] private float fadeOutDuration = 0.2f; // Thời gian để fade-out hoàn tất (giây)
 
+    [Header("Audio Clip Cancel")]
     [SerializeField] private AudioSource cancelSound;
+    [SerializeField] private AudioSource selectSound;
+
+    [Header("Current Active Tab")]
+    private bool isGeneralTabActive = true;
 
     private MenuInputHandler _menuInputHandler;
     #endregion
@@ -49,6 +71,122 @@ public class SettingManager : MonoBehaviour
 
         _menuInputHandler = GetComponent<MenuInputHandler>();
         _menuInputHandler.playerInput.CharacterInput.Cancel.performed += context => HandleCancel();
+
+        // Initially set up button listeners for tab switching
+        generalSettingButton.onClick.AddListener(() => SwitchToTab(true));
+        inputSettingButton.onClick.AddListener(() => SwitchToTab(false));
+
+        // Ensure only General tab is visible initially
+        ShowGeneralTab();
+    }
+
+    private void SwitchToTab(bool toGeneralTab)
+    {
+        if (isGeneralTabActive == toGeneralTab) return;
+
+        StartCoroutine(AnimateTabSwitch(toGeneralTab));
+    }
+
+    private void ShowGeneralTab()
+    {
+        generalSettingCanvas.SetActive(true);
+        inputSettingCanvas.SetActive(false);
+
+        generalSettingGroup.alpha = 1;
+        generalSettingGroup.interactable = true;
+        generalSettingGroup.blocksRaycasts = true;
+
+        inputSettingGroup.alpha = 0;
+        inputSettingGroup.interactable = false;
+        inputSettingGroup.blocksRaycasts = false;
+
+        isGeneralTabActive = true;
+    }
+
+    private void ShowInputTab()
+    {
+        generalSettingCanvas.SetActive(false);
+        inputSettingCanvas.SetActive(true);
+
+        generalSettingGroup.alpha = 0;
+        generalSettingGroup.interactable = false;
+        generalSettingGroup.blocksRaycasts = false;
+
+        inputSettingGroup.alpha = 1;
+        inputSettingGroup.interactable = true;
+        inputSettingGroup.blocksRaycasts = true;
+
+        isGeneralTabActive = false;
+    }
+
+    private IEnumerator AnimateTabSwitch(bool toGeneralTab)
+    {
+        float duration = 0.25f;
+        float elapsed = 0f;
+
+        // Fade out current tab
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+
+            if (toGeneralTab)
+            {
+                inputSettingGroup.alpha = alpha;
+            }
+            else
+            {
+                generalSettingGroup.alpha = alpha;
+            }
+
+            yield return null;
+        }
+
+        // Switch tabs
+        if (toGeneralTab)
+        {
+            ShowGeneralTab();
+        }
+        else
+        {
+            ShowInputTab();
+        }
+
+        // Reset elapsed time for fade in
+        elapsed = 0f;
+
+        // Fade in new tab
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, elapsed / duration);
+
+            if (toGeneralTab)
+            {
+                generalSettingGroup.alpha = alpha;
+            }
+            else
+            {
+                inputSettingGroup.alpha = alpha;
+            }
+
+            yield return null;
+        }
+
+        // Ensure final alpha is set
+        if (toGeneralTab)
+        {
+            generalSettingGroup.alpha = 1f;
+        }
+        else
+        {
+            inputSettingGroup.alpha = 1f;
+        }
+    }
+
+    public void HandleSelectSettings()
+    {
+        selectSound.PlayOneShot(selectSound.clip);
     }
 
     private void HandleCancel()
