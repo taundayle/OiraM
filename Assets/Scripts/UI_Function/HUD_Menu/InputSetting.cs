@@ -100,6 +100,16 @@ public class InputSetting : MonoBehaviour
         StartCoroutine(FadeOutCanvasGroup(defaultGroup));
     }
 
+    public void HideNoticeSaveSettings()
+    {
+        StartCoroutine(FadeOutCanvasGroup(saveGroup));
+    }
+
+    public void HideNoticeDefaultSettings()
+    {
+        StartCoroutine(FadeOutCanvasGroup(defaultGroup));
+    }
+
     void HideCanvasGroup(CanvasGroup group)
     {
         cancelInput.PlayOneShot(cancelInput.clip);

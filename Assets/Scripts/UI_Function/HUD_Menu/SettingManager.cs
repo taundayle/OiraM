@@ -195,6 +195,8 @@ public class SettingManager : MonoBehaviour
     {
         Debug.Log("Cancel action triggered");
 
+        UnlockInputTab();
+
         cancelSound.PlayOneShot(cancelSound.clip);
 
         // Kiểm tra và ẩn các canvas group thông báo nếu đang hiển thị
@@ -207,6 +209,18 @@ public class SettingManager : MonoBehaviour
         if (generalSetting._defaultGroup.alpha > 0)
         {
             generalSetting.HideNoticeDefaultSettings();
+            return;
+        }
+
+        if (inputSetting.defaultGroup.alpha > 0)
+        {
+            inputSetting.HideNoticeDefaultSettings();
+            return;
+        }
+
+        if (inputSetting.saveGroup.alpha > 0)
+        {
+            inputSetting.HideNoticeSaveSettings();
             return;
         }
 
@@ -247,6 +261,12 @@ public class SettingManager : MonoBehaviour
 
         inputSettingGroup1.interactable = false;
         inputSettingGroup1.blocksRaycasts = false;
+
+        generalSettingGroup.interactable = false;
+        generalSettingGroup.blocksRaycasts = false;
+
+        inputSettingGroup.interactable = false;
+        inputSettingGroup.blocksRaycasts = false;
     }
 
     public void UnlockInputTab()
@@ -256,6 +276,12 @@ public class SettingManager : MonoBehaviour
 
         inputSettingGroup1.interactable = true;
         inputSettingGroup1.blocksRaycasts = true;
+
+        generalSettingGroup.interactable = true;
+        generalSettingGroup.blocksRaycasts = true;
+
+        inputSettingGroup.interactable = true;
+        inputSettingGroup.blocksRaycasts = true;
     }
     #endregion
 
