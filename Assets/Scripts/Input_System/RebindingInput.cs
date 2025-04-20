@@ -2,6 +2,7 @@
 using Script.Input_System;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Linq;
 
 public class RebindingInput : MonoBehaviour
 {
@@ -13,6 +14,64 @@ public class RebindingInput : MonoBehaviour
     [SerializeField] GameObject waitingRebinding = null;
 
     private InputActionRebindingExtensions.RebindingOperation _rebindingOperation;
+    private int _bindingIndex = -1;
+
+    void Start()
+    {
+        // Kiểm tra và in thông tin chi tiết về action
+        ValidateInputAction();
+    }
+
+    void ValidateInputAction()
+    {
+        if (_actionInput == null || _actionInput.action == null)
+        {
+            Debug.LogError("Input Action Reference là null!");
+            return;
+        }
+
+        // In thông tin chi tiết về action
+        Debug.Log($"Action Name: {_actionInput.action.name}");
+        Debug.Log($"Total Bindings: {_actionInput.action.bindings.Count}");
+
+        // Tìm index của binding đầu tiên phù hợp
+        _bindingIndex = FindFirstNonCompositeBindingIndex();
+
+        if (_bindingIndex != -1)
+        {
+            // Cập nhật văn bản binding ban đầu
+            UpdateBindingText(_bindingIndex);
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy binding phù hợp.");
+        }
+    }
+
+    int FindFirstNonCompositeBindingIndex()
+    {
+        var action = _actionInput.action;
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            // Bỏ qua các binding là composite
+            if (!action.bindings[i].isPartOfComposite)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    void UpdateBindingText(int bindingIndex)
+    {
+        if (bindingText == null) return;
+
+        var bindingPath = _actionInput.action.bindings[bindingIndex].effectivePath;
+        bindingText.text = InputControlPath.ToHumanReadableString(
+            bindingPath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice
+        );
+    }
 
     public void StartRebinding()
     {
@@ -20,6 +79,12 @@ public class RebindingInput : MonoBehaviour
         if (_actionInput == null || _actionInput.action == null)
         {
             Debug.LogError("Input Action Reference là null!");
+            return;
+        }
+
+        if (_bindingIndex == -1)
+        {
+            Debug.LogError("Không có binding nào để rebind!");
             return;
         }
 
@@ -33,7 +98,7 @@ public class RebindingInput : MonoBehaviour
         waitingRebinding.SetActive(true);
 
         // 3. Thực hiện rebind
-        _rebindingOperation = action.PerformInteractiveRebinding()
+        _rebindingOperation = action.PerformInteractiveRebinding(_bindingIndex)
             .WithControlsExcluding("Mouse")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => HandleRebindComplete(operation))
@@ -44,25 +109,8 @@ public class RebindingInput : MonoBehaviour
     {
         try
         {
-            // Kiểm tra xem action có controls hay không
-            if (_actionInput.action.controls.Count == 0)
-            {
-                Debug.LogWarning("Không có control nào được tìm thấy cho action.");
-                ResetRebindUI();
-                return;
-            }
-
-            // Lấy path của binding mới
-            string newBindingPath = GetNewBindingPath(operation);
-
             // Cập nhật văn bản binding
-            if (!string.IsNullOrEmpty(newBindingPath))
-            {
-                bindingText.text = InputControlPath.ToHumanReadableString(
-                    newBindingPath,
-                    InputControlPath.HumanReadableStringOptions.OmitDevice
-                );
-            }
+            UpdateBindingText(_bindingIndex);
         }
         catch (System.Exception e)
         {
@@ -77,31 +125,13 @@ public class RebindingInput : MonoBehaviour
         }
     }
 
-    private string GetNewBindingPath(InputActionRebindingExtensions.RebindingOperation operation)
-    {
-        // Thử lấy path từ operation
-        if (operation != null && operation.action != null && operation.action.bindings.Count > 0)
-        {
-            return operation.action.bindings[operation.bindingIndex].effectivePath;
-        }
-
-        // Nếu không được, thử lấy từ action
-        if (_actionInput.action.bindings.Count > 0)
-        {
-            return _actionInput.action.bindings[0].effectivePath;
-        }
-
-        Debug.LogWarning("Không thể tìm thấy binding path.");
-        return string.Empty;
-    }
-
     private void ResetRebindUI()
     {
         startRebinding.SetActive(true);
         waitingRebinding.SetActive(false);
     }
 
-    // Phương thức lưu rebinding
+    // Các phương thức SaveRebindings, LoadRebindings giữ nguyên như trước
     public void SaveRebindings()
     {
         if (_actionInput?.action == null) return;
@@ -119,7 +149,6 @@ public class RebindingInput : MonoBehaviour
         }
     }
 
-    // Phương thức tải rebinding
     public void LoadRebindings()
     {
         if (_actionInput?.action == null) return;
@@ -131,6 +160,12 @@ public class RebindingInput : MonoBehaviour
             {
                 _actionInput.action.LoadBindingOverridesFromJson(savedBindingJson);
                 Debug.Log($"Đã tải rebinding cho {_actionInput.action.name}");
+
+                // Cập nhật lại văn bản binding sau khi tải
+                if (_bindingIndex != -1)
+                {
+                    UpdateBindingText(_bindingIndex);
+                }
             }
         }
         catch (System.Exception e)
