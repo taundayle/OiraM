@@ -20,6 +20,9 @@ public class SettingManager : MonoBehaviour
     public Button generalSettingButton;
     public CanvasGroup generalSettingGroup1;
 
+    public CanvasGroup defaultGroupGeneral;
+    public CanvasGroup saveGroupGeneral;
+
     [Header("Setting Input")]
     public InputSetting inputSetting;
     public CanvasGroup inputSettingGroup;
@@ -27,6 +30,9 @@ public class SettingManager : MonoBehaviour
 
     public Button inputSettingButton;
     public CanvasGroup inputSettingGroup1;
+
+    public CanvasGroup defaultGroupInput;
+    public CanvasGroup saveGroupInput;
 
     [Header("Setting Check")]
     public bool isOpen;
@@ -267,6 +273,18 @@ public class SettingManager : MonoBehaviour
 
         inputSettingGroup.interactable = false;
         inputSettingGroup.blocksRaycasts = false;
+
+        saveGroupGeneral.interactable = false;
+        saveGroupGeneral.blocksRaycasts = false;
+
+        saveGroupInput.interactable = false;
+        saveGroupInput.blocksRaycasts = false;
+
+        defaultGroupGeneral.interactable = false;
+        defaultGroupGeneral.blocksRaycasts = false;
+
+        defaultGroupInput.interactable = false;
+        defaultGroupInput.blocksRaycasts = false;
     }
 
     public void UnlockInputTab()
@@ -282,6 +300,18 @@ public class SettingManager : MonoBehaviour
 
         inputSettingGroup.interactable = true;
         inputSettingGroup.blocksRaycasts = true;
+
+        saveGroupGeneral.interactable = true;
+        saveGroupGeneral.blocksRaycasts = true;
+
+        saveGroupInput.interactable = true;
+        saveGroupInput.blocksRaycasts = true;
+
+        defaultGroupGeneral.interactable = true;
+        defaultGroupGeneral.blocksRaycasts = true;
+
+        defaultGroupInput.interactable = true;
+        defaultGroupInput.blocksRaycasts = true;
     }
     #endregion
 
