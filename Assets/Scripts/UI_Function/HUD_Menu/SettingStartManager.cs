@@ -3,10 +3,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingManager : MonoBehaviour
+public class SettingStartManager : MonoBehaviour
 {
     #region Biến khai báo
-    public static SettingManager Instance { get; private set; }
+    public static SettingStartManager Instance { get; private set; }
 
     [Header("Main Menu")]
     public CanvasGroup _startMenuGroup;

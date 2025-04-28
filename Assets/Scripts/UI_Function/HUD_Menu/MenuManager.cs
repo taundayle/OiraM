@@ -85,14 +85,14 @@ namespace Script.Input_System // Nếu thay đổi địa chỉ tệp thì phả
         {
             Debug.Log("Settings Game");
 
-            if (SettingManager.Instance != null)
+            if (SettingStartManager.Instance != null)
             {
                 _startMenuGroup.alpha = 0f;
                 _startMenuGroup.blocksRaycasts = false;
                 _startMenuGroup.interactable = false;
                 inputHandler.enabled = false;
 
-                SettingManager.Instance.OpenSettings();
+                SettingStartManager.Instance.OpenSettings();
             }
             else
             {
