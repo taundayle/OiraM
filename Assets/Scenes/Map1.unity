@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.2754717, g: 0.2754717, b: 0.2754717, a: 1}
+  m_FogColor: {r: 0.23773581, g: 0.23773581, b: 0.23773581, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.032
   m_LinearFogStart: 0
@@ -448,7 +448,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 0.97823286, b: 0.91886795, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
