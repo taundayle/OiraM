@@ -582,6 +582,10 @@ PrefabInstance:
       propertyPath: WindZone
       value: 
       objectReference: {fileID: 1276207532}
+    - target: {fileID: 11437536, guid: 69b40ef7ee16c834c844b3fa26e0fdda, type: 3}
+      propertyPath: RainSoundAudioMixer
+      value: 
+      objectReference: {fileID: -8325746956534040539, guid: d3fe99c120b7884488307983c95b4f2b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
