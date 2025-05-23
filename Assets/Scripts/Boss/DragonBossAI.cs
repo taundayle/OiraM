@@ -3,27 +3,40 @@ using UnityEngine.AI;
 
 public class DragonBossAI : MonoBehaviour
 {
-    public enum State { Idle, Chase, Attack }
+    public enum State { Idle, Chase, Attack, ReturnToStart }
     public State currentState;
 
-    [Header("Settings")]
+    [Header("AI Settings")]
     public float chaseRange = 20f;
     public float attackRange = 10f;
     public float attackCooldown = 3f;
     public float rotationSpeed = 5f;
+    public float returnSpeed = 4f;
 
     [Header("Attacks")]
-    public string[] groundAttacks = { "Basic Attack", "Claw Attack", "Flame Attack" };
+    public string[] groundAttacks = { "Basic Attack", "Flame Attack" };
+
+    [Header("VFX Settings")]
+    public ParticleSystem flameVFX;
+    public float flameRadius = 3f;
+    public LayerMask playerLayer;
+
+    [Header("SFX")]
+    public AudioClip flameSound;
 
     private Transform player;
     private NavMeshAgent navMeshAgent;
     private Animator animator;
+    private AudioSource audioSource;
+    private Vector3 startPosition;
     private float lastAttackTime;
 
     void Start()
     {
         InitializeComponents();
+        startPosition = transform.position;
         currentState = State.Idle;
+        if (flameVFX != null) flameVFX.Stop();
     }
 
     void InitializeComponents()
@@ -31,11 +44,10 @@ public class DragonBossAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
-        // Thiết lập NavMeshAgent
-        navMeshAgent.speed = 5f;
         navMeshAgent.stoppingDistance = attackRange;
-        navMeshAgent.angularSpeed = 120f;
+        navMeshAgent.speed = returnSpeed;
     }
 
     void Update()
@@ -61,6 +73,10 @@ public class DragonBossAI : MonoBehaviour
             case State.Attack:
                 HandleAttackState(distance);
                 break;
+
+            case State.ReturnToStart:
+                HandleReturnState();
+                break;
         }
     }
 
@@ -70,25 +86,30 @@ public class DragonBossAI : MonoBehaviour
         {
             TransitionToState(State.Chase, "Walk");
         }
+        else
+        {
+            animator.SetTrigger("Idle01");
+        }
     }
 
     void HandleChaseState(float distance)
     {
-        // Di chuyển đến player và xoay mặt
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(player.position);
         FaceTarget();
 
-        // Chuyển sang tấn công nếu đủ gần
         if (distance <= attackRange)
         {
             TransitionToState(State.Attack, "Idle01");
+        }
+        else if (distance > chaseRange)
+        {
+            TransitionToState(State.ReturnToStart, "Walk");
         }
     }
 
     void HandleAttackState(float distance)
     {
-        // Dừng di chuyển và tấn công
         navMeshAgent.isStopped = true;
         FaceTarget();
 
@@ -98,10 +119,21 @@ public class DragonBossAI : MonoBehaviour
             lastAttackTime = Time.time;
         }
 
-        // Quay lại đuổi nếu player chạy xa
         if (distance > attackRange * 1.2f)
         {
-            TransitionToState(State.Chase, "Walk");
+            TransitionToState(distance > chaseRange ? State.ReturnToStart : State.Chase, "Walk");
+        }
+    }
+
+    void HandleReturnState()
+    {
+        navMeshAgent.isStopped = false;
+        navMeshAgent.SetDestination(startPosition);
+        FaceTarget();
+
+        if (Vector3.Distance(transform.position, startPosition) < 1f)
+        {
+            TransitionToState(State.Idle, "Idle01");
         }
     }
 
@@ -126,15 +158,35 @@ public class DragonBossAI : MonoBehaviour
     void PerformAttack()
     {
         if (groundAttacks.Length == 0) return;
+
         int randomIndex = Random.Range(0, groundAttacks.Length);
-        animator.SetTrigger(groundAttacks[randomIndex]);
+        string attackTrigger = groundAttacks[randomIndex];
+        animator.SetTrigger(attackTrigger);
+
+        if (attackTrigger == "Flame Attack")
+        {
+            flameVFX.Play();
+            PlayFlameSound();
+        }
     }
 
     void FaceTarget()
     {
         Vector3 direction = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            lookRotation,
+            Time.deltaTime * rotationSpeed
+        );
+    }
+
+    void PlayFlameSound()
+    {
+        if (flameSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(flameSound);
+        }
     }
 
     void OnDrawGizmosSelected()
@@ -143,5 +195,11 @@ public class DragonBossAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, chaseRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        if (flameVFX != null)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(flameVFX.transform.position, flameRadius);
+        }
     }
 }
