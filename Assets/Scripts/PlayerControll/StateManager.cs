@@ -14,6 +14,7 @@ namespace SA
         public float vertical;
         public float moveAmount;
         public Vector3 moveDir;
+        public bool rt, rb, lt, lb;
 
         [Header("Stats")]
         public float moveSpeed = 2;
@@ -25,16 +26,23 @@ namespace SA
         public bool onGround;
         public bool run;
         public bool lockOn;
+        public bool inAction;
+        public bool canMove;
+        public bool isTwoHanded;
 
         [HideInInspector]
         public Animator anim;
         [HideInInspector]
         public Rigidbody rigid;
+        [HideInInspector]
+        public AnimatorHook a_hook; 
 
         [HideInInspector]
         public float delta;
         [HideInInspector]
         public LayerMask ignoreLayer;
+
+        float _actionDelay;
 
         public void Init()
         {
@@ -43,6 +51,9 @@ namespace SA
             rigid.angularDrag = 999;
             rigid.drag = 4;
             rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+            a_hook = activeModel.AddComponent<AnimatorHook>();
+            a_hook.Init(this);
 
             gameObject.layer = 8;
             ignoreLayer = ~(1 << 9);
@@ -73,6 +84,34 @@ namespace SA
         { 
             delta = d;
 
+            DetectAction();
+
+            if (inAction)
+            {
+                anim.applyRootMotion = true;
+
+                _actionDelay += delta;
+                if (_actionDelay > 0.3f)
+                {
+                    inAction = false;
+                    _actionDelay = 0;
+                }
+                else
+                {
+                    return;
+
+                }
+
+            }
+
+            canMove = anim.GetBool("canMove");
+
+
+            if (!canMove)
+                return;
+            
+            anim.applyRootMotion = false;
+
             rigid.drag = (moveAmount > 0 || onGround == false) ? 0 : 4;
 
             float targetSpeed = moveSpeed;
@@ -100,11 +139,41 @@ namespace SA
             HandleMovementAnimator();
         }
 
+        public void DetectAction()
+        {
+            if (canMove == false)
+                return;
+
+            if(rb == false && rt == false && lt == false && lb == false)
+                return;
+
+
+
+            string targetAnim = null;
+
+            if (rb)
+                targetAnim = "attack2";
+            if (rt)
+                targetAnim = "attack3";
+            if (lt)
+                targetAnim = "attack6";
+            if (lb)
+                targetAnim = "attack4";
+
+            if (string.IsNullOrEmpty(targetAnim))
+                return;
+
+            canMove = false;
+            inAction = true;
+            anim.CrossFade(targetAnim, 0.2f);
+            //rigid.velocity = Vector3.zero;
+        }
+
         public void Tick(float d)
         {
             delta = d;
             onGround = OnGround();
-            anim.SetBool("OnGround", onGround);
+            anim.SetBool("onGround", onGround);
         }
         void HandleMovementAnimator()
         {
@@ -133,6 +202,11 @@ namespace SA
             }
 
             return r;
+        }
+
+        public void HandleTwoHanded()
+        {
+            anim.SetBool("two_handed", isTwoHanded); 
         }
 
     }
