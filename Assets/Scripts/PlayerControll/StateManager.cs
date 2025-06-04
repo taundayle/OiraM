@@ -30,6 +30,9 @@ namespace SA
         public bool canMove;
         public bool isTwoHanded;
 
+        [Header("Other")]
+        public EnemyTarget lockOnTarget;
+
         [HideInInspector]
         public Animator anim;
         [HideInInspector]
@@ -111,7 +114,6 @@ namespace SA
                 return;
             
             anim.applyRootMotion = false;
-
             rigid.drag = (moveAmount > 0 || onGround == false) ? 0 : 4;
 
             float targetSpeed = moveSpeed;
@@ -124,19 +126,20 @@ namespace SA
             if(run)
                 lockOn = false; 
 
-            if (!lockOn)
-            {
-                Vector3 targetDir = moveDir;
-                targetDir.y = 0;
-                if(targetDir == Vector3.zero)
-                    targetDir = transform.forward;
-                Quaternion tr = Quaternion.LookRotation(targetDir);
-                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, delta * moveAmount * rotateSpeed);
-                transform.rotation = targetRotation;
-            }
+            Vector3 targetDir = (lockOn == false)? moveDir : lockOnTarget.transform.position - transform.position;
+            targetDir.y = 0;
+            if(targetDir == Vector3.zero)
+                targetDir = transform.forward;
+            Quaternion tr = Quaternion.LookRotation(targetDir);
+            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, delta * moveAmount * rotateSpeed);
+            transform.rotation = targetRotation;
 
+            anim.SetBool("lockon", lockOn);
 
-            HandleMovementAnimator();
+            if (lockOn == false)
+                HandleMovementAnimations();
+            else
+                HandleLockOnAnimations(moveDir);
         }
 
         public void DetectAction()
@@ -152,13 +155,13 @@ namespace SA
             string targetAnim = null;
 
             if (rb)
-                targetAnim = "attack2";
+                targetAnim = "attack1";
             if (rt)
-                targetAnim = "attack3";
+                targetAnim = "attack2";
             if (lt)
-                targetAnim = "attack6";
+                targetAnim = "attack3";
             if (lb)
-                targetAnim = "attack4";
+                targetAnim = "th_attack1";
 
             if (string.IsNullOrEmpty(targetAnim))
                 return;
@@ -175,10 +178,20 @@ namespace SA
             onGround = OnGround();
             anim.SetBool("onGround", onGround);
         }
-        void HandleMovementAnimator()
+        void HandleMovementAnimations()
         {
             anim.SetBool("run", run);
             anim.SetFloat("Vertical", moveAmount, 0.4f, delta);
+        }
+
+        void HandleLockOnAnimations(Vector3 moveDir)
+        {
+            Vector3 relativeDir = transform.InverseTransformDirection(moveDir);
+            float h = relativeDir.x;
+            float v = relativeDir.z;
+
+            anim.SetFloat("vertical", v, 0.2f, delta);
+            anim.SetFloat("horizontal", h, 0.2f, delta);
         }
 
         public bool OnGround()

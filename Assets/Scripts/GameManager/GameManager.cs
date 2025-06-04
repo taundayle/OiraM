@@ -46,6 +46,7 @@ public abstract class GameManager : MonoBehaviour
     public float CriticalMagic;     //Chí mạng phép thuật
     public float CriticalPhysical;    //Chí mạng vật lý
 
-
+    //EXP
+    public float Exp;
 
 }

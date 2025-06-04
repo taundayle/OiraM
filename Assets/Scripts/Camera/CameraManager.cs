@@ -13,6 +13,7 @@ namespace SA
 
 
         public Transform target;
+        public Transform lockonTarget;
 
         [HideInInspector]
         Transform pivot;
@@ -79,17 +80,26 @@ namespace SA
                 smoothY = v;
             }
 
-            if(lockon)
-            {
+            tiltAngle -= smoothY * targetSpeed;
+            tiltAngle = Mathf.Clamp(tiltAngle, minAngle, maxAngle);
+            pivot.localRotation = Quaternion.Euler(tiltAngle, 0, 0);
 
+            if (lockon && lockonTarget != null)
+            {
+                Vector3 targetDir = lockonTarget.position - transform.position;
+                targetDir.Normalize();
+
+                if(targetDir == Vector3.zero)
+                    targetDir = transform.forward;
+                Quaternion targetRot = Quaternion.LookRotation(targetDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, d * 9);
+                lookAngle = transform.eulerAngles.y;
+                return;
             }
 
             lookAngle += smoothX * targetSpeed;
             transform.rotation = Quaternion.Euler(0, lookAngle, 0);
 
-            tiltAngle -= smoothY * targetSpeed;
-            tiltAngle = Mathf.Clamp(tiltAngle, minAngle, maxAngle);
-            pivot.localRotation = Quaternion.Euler(tiltAngle, 0, 0);
         }
 
         public static CameraManager singleton;
