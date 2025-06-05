@@ -139,7 +139,9 @@ namespace SA
             if (lockOn == false)
                 HandleMovementAnimations();
             else
+            {
                 HandleLockOnAnimations(moveDir);
+            }
         }
 
         public void DetectAction()
@@ -190,8 +192,8 @@ namespace SA
             float h = relativeDir.x;
             float v = relativeDir.z;
 
-            anim.SetFloat("vertical", v, 0.2f, delta);
-            anim.SetFloat("horizontal", h, 0.2f, delta);
+            anim.SetFloat("Vertical", v, 0.2f, delta);
+            anim.SetFloat("Horizontal", h, 0.2f, delta);
         }
 
         public bool OnGround()
