@@ -1,1 +1,2 @@
 Assets/Resource/Environment/Church_re.fbx filter=lfs diff=lfs merge=lfs -text
+*.fbx filter=lfs diff=lfs merge=lfs -text
