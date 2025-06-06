@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class GameSession : GameManager
 {
+    public PlayerUILevelUpManager playerUILevelUpManager;
     [Header("Panel Upgrade")]
     public GameObject UIUpLevel;
     #region Slider
@@ -14,6 +15,7 @@ public class GameSession : GameManager
     public Slider easeStaminaSlider;
     public Slider manaSlider;
     public Slider easeManaSlider;
+    public Slider expSlider;
     #endregion
 
     #region Ease
@@ -54,6 +56,7 @@ public class GameSession : GameManager
         easeStaminaSlider.maxValue = MaxStamina;
         manaSlider.maxValue = MaxMana;
         easeManaSlider.maxValue = MaxMana;
+        expSlider.maxValue = playerUILevelUpManager.expNeeded;   //EXP cần thiết để lên cấp
     }
     private void Update()
     {
@@ -61,6 +64,7 @@ public class GameSession : GameManager
         HealthSlider();
         StaminaSlider();
         ManaSlider();
+        ExpSlider();
         if (Input.GetKeyDown(KeyCode.U))
         {
             UIUpLevel.SetActive(!UIUpLevel.activeSelf);
@@ -110,5 +114,9 @@ public class GameSession : GameManager
         {
             easeManaSlider.value = Mathf.Lerp(easeManaSlider.value, Mana, lerpSpeedMana);
         }
+    }
+    void ExpSlider()
+    {
+        expSlider.value = playerUILevelUpManager.exp;
     }
 }
