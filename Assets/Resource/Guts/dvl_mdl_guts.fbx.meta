@@ -60,8 +60,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: dvl_mdl_guts_idle_00
-      takeName: dvl_mdl_guts_idle_00
+      name: dvl_mdl_guts_spskill_00 (1)
+      takeName: dvl_mdl_guts_spskill_00
       internalID: 1391218145530079867
       firstFrame: 0
       lastFrame: 111
