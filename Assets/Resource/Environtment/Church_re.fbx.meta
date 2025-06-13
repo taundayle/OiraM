@@ -1,0 +1,334 @@
+fileFormatVersion: 2
+guid: 4dedbcdc14176db459648f016bb6ccef
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ARCH_SHORT
+    second: {fileID: 2100000, guid: d1a9fe79bd375a04ba62a0dc0758f44f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FACADE
+    second: {fileID: 2100000, guid: 86fa36bf749bf9e48bf26de6720aec24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GATE
+    second: {fileID: 2100000, guid: dc6f91d907c226745baa51ca2c496280, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LONE_STONE_01
+    second: {fileID: 2100000, guid: 36d43808e9366184585c1dfb850b6416, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LONE_STONE_02
+    second: {fileID: 2100000, guid: 9e38adb5d4ae2534aa58760c718ea025, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LONG_ARCH
+    second: {fileID: 2100000, guid: c329044cc4a647f49b2cf877a52827f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PILLAR_01
+    second: {fileID: 2100000, guid: 037db1298726f2c4eb29d583613198e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PILLAR_02
+    second: {fileID: 2100000, guid: 4cd92442500bd0d4292dc44a10942396, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RUINED_PAVEMENT
+    second: {fileID: 2100000, guid: 2d1de5ede46347a4eb9dfb8b4c3cfffc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RUINED_PAVEMENT_02
+    second: {fileID: 2100000, guid: 75210b8725ad1b046a67d164ee13339d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RUINED_WALL
+    second: {fileID: 2100000, guid: de1d19901abc1604f87a0963290b1e6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RUINED_WALL_STONES
+    second: {fileID: 2100000, guid: c27a6081edc4e354e93d8a11a781f312, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SIDE_ARCH
+    second: {fileID: 2100000, guid: 9e1f243b288e0a84d9bb7f27139c77ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SMALL_RUINED_WALL
+    second: {fileID: 2100000, guid: 63d1678cb41077b42b6fbaad1ba4d759, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SMALL_RUINED_WALL_STONES
+    second: {fileID: 2100000, guid: c2797d68e5b710a43b6ef11034ab97ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TOWER_FACADE
+    second: {fileID: 2100000, guid: 43b020d5f27f3b341a752d284b21a0a7, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ARCH_SHORT_baseColor
+    second: {fileID: 2800000, guid: 74375cbd72adb5e41be8a69c0dd3c9a6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ARCH_SHORT_normal
+    second: {fileID: 2800000, guid: 41989f67313b65145b5969935d6baead, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: FACADE_baseColor
+    second: {fileID: 2800000, guid: df5ffefbd7981854b966d51597077964, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: FACADE_normal
+    second: {fileID: 2800000, guid: d836ff1722680bf4f884f76bdaf057a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GATE_baseColor
+    second: {fileID: 2800000, guid: 0d611eab291bbe04789ac970636987ce, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: GATE_normal
+    second: {fileID: 2800000, guid: efc44cd9ec83c3f46b220c03bc78929c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LONE_STONE_01_baseColor
+    second: {fileID: 2800000, guid: 3cae75d25f6c391459ac87d14d38b5ec, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LONE_STONE_02_baseColor
+    second: {fileID: 2800000, guid: c865ac969eea2cc47842d515912bcd84, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LONE_STONE_02_normal
+    second: {fileID: 2800000, guid: 51b9dd4c80a96be46ba39aff0fc206da, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LONG_ARCH_baseColor
+    second: {fileID: 2800000, guid: 8d734327360fd9245a7ca1b346e34f66, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LONG_ARCH_normal
+    second: {fileID: 2800000, guid: 03253dc346b807e4fab197cce58a7301, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PILLAR_01_baseColor
+    second: {fileID: 2800000, guid: bcd336a3828693745aba501413585b4b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PILLAR_01_normal
+    second: {fileID: 2800000, guid: 4f7eac9ad9675af4cb348ac8a76880e2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PILLAR_02_baseColor
+    second: {fileID: 2800000, guid: 6423e2e5543cc8941aa8712b56dafc32, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PILLAR_02_normal
+    second: {fileID: 2800000, guid: b614aee28386fec468a891d447041a01, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: RUINED_PAVEMENT_baseColor
+    second: {fileID: 2800000, guid: 8e74b651f45eecd4c901a6946fa05d6d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: RUINED_PAVEMENT_normal
+    second: {fileID: 2800000, guid: daee124120d603a48aadcc7d479c47ce, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: RUINED_WALL_STONES_baseColor
+    second: {fileID: 2800000, guid: 117b11f6112aba84288f83c7da301df5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: RUINED_WALL_STONES_normal
+    second: {fileID: 2800000, guid: e943ff9e3f5f0fc4d8bb107b56b464ce, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: RUINED_WALL_baseColor
+    second: {fileID: 2800000, guid: 3cbc9cba3593d304eaa8f08603f2fe17, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: RUINED_WALL_normal
+    second: {fileID: 2800000, guid: b231b48e73924e14492732294344f0c2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SIDE_ARCH_baseColor
+    second: {fileID: 2800000, guid: e065248cc62c397478bf32a91d248e4d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SIDE_ARCH_normal
+    second: {fileID: 2800000, guid: e84bb7ce712339440a03f5bfc8305f71, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SMALL_RUINED_WALL_STONES_baseColor
+    second: {fileID: 2800000, guid: 446bc14e6bb141345a6588b8b45fcce3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SMALL_RUINED_WALL_STONES_normal
+    second: {fileID: 2800000, guid: 53dbd6d795bc68a4aa2e8e02f8840bd0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SMALL_RUINED_WALL_baseColor
+    second: {fileID: 2800000, guid: e08775d66410ca3419640bf2cd294781, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SMALL_RUINED_WALL_normal
+    second: {fileID: 2800000, guid: 51db072c517c516408026b8fd15073ab, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TOWER_FACADE_baseColor
+    second: {fileID: 2800000, guid: 66437beedf2ce6745a126457aa784ec5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TOWER_FACADE_normal
+    second: {fileID: 2800000, guid: 71673d74908e95f47a9ae15971ecdada, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
