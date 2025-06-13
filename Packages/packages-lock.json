@@ -98,7 +98,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.postprocessing": {
-      "version": "2.3.0",
+      "version": "2.1.7",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
