@@ -11,6 +11,12 @@ public class BossAI : MonoBehaviour
     private NavMeshAgent agent;
     private AudioSource audioSource;
 
+    [Header("Health & Death")]
+    [Tooltip("Máu tối đa của boss")]
+    public float maxHealth = 100f;
+    private float currentHealth;
+    private bool isDead = false;
+
     [Header("Ranges & Timers")]
     public float chaseRange = 15f;
     public float stoppingDistance = 4f;
@@ -26,6 +32,9 @@ public class BossAI : MonoBehaviour
     [Header("Audio Clips")]
     public AudioClip screamSound;
     public AudioClip flameSound;
+    public AudioClip dieSound;
+    // Nếu muốn tiếng GetHit, có thể thêm:
+    // public AudioClip hitSound;
 
     [Header("Flame Effect")]
     [Tooltip("Prefab particle cho lửa")]
@@ -58,6 +67,7 @@ public class BossAI : MonoBehaviour
 
     void Start()
     {
+        currentHealth = maxHealth;
         animator.SetBool("PlayerInRange", false);
         animator.SetBool("InCombat", false);
         animator.SetFloat(speedParameter, 0f);
@@ -65,11 +75,21 @@ public class BossAI : MonoBehaviour
 
     void Update()
     {
+        // Phím P để test damage
+        if (!isDead && Input.GetKeyDown(KeyCode.P))
+        {
+            TakeDamage(20f);
+            Debug.Log($"Boss took 20 damage, HP now {currentHealth}/{maxHealth}");
+        }
+
+        // Nếu boss đã chết, dừng mọi logic khác
+        if (isDead) return;
+
         float dist = Vector3.Distance(transform.position, player.position);
         bool playerInRange = dist <= chaseRange;
         animator.SetBool("PlayerInRange", playerInRange);
 
-        // 1) Scream once when player enters chaseRange
+        // Scream lần đầu khi player vào tầm
         if (playerInRange && !hasScreamedOnApproach)
         {
             TriggerScream();
@@ -110,12 +130,9 @@ public class BossAI : MonoBehaviour
     private void TriggerScream()
     {
         animator.SetTrigger("Scream");
-        // audio sẽ được phát bởi Animation Event
+        // Audio Scream do Animation Event gọi PlayScreamAudioEvent()
     }
 
-    /// <summary>
-    /// Gọi từ Animation Event trên clip Scream để phát âm thanh đúng timing
-    /// </summary>
     public void PlayScreamAudioEvent()
     {
         if (screamSound != null)
@@ -179,25 +196,11 @@ public class BossAI : MonoBehaviour
         else // Flame
         {
             animator.SetTrigger("FlameAttack");
-            // effect và sound sẽ được gọi qua Animation Event
         }
 
         lastAttackTime = Time.time;
     }
 
-    private void ResetCombat()
-    {
-        agent.isStopped = true;
-        if (inCombat)
-        {
-            inCombat = false;
-            animator.SetBool("InCombat", false);
-        }
-    }
-
-    /// <summary>
-    /// Gọi từ Animation Event trên clip FlameAttack để tạo effect + phát sound
-    /// </summary>
     public void PlayFlameEffectEvent()
     {
         if (flameSound != null)
@@ -211,6 +214,39 @@ public class BossAI : MonoBehaviour
         }
     }
 
-    // Gọi ngoài nếu cần xử lý HP
-    public void TakeDamage(float damage) { }
+    private void ResetCombat()
+    {
+        agent.isStopped = true;
+        if (inCombat)
+        {
+            inCombat = false;
+            animator.SetBool("InCombat", false);
+        }
+    }
+
+    /// <summary>
+    /// Gây sát thương cho boss.
+    /// Trigger GetHit nếu vẫn còn sống, hoặc Die nếu HP ≤ 0.
+    /// </summary>
+    public void TakeDamage(float damage)
+    {
+        if (isDead) return;
+
+        currentHealth -= damage;
+
+        // Trigger GetHit animation
+        animator.SetTrigger("GetHit");
+        // Nếu có âm thanh hit, bạn có thể play ở đây:
+        // if (hitSound != null) audioSource.PlayOneShot(hitSound);
+
+        if (currentHealth <= 0f)
+        {
+            currentHealth = 0f;
+            isDead = true;
+            agent.isStopped = true;
+            animator.SetTrigger("Die");
+            if (dieSound != null)
+                audioSource.PlayOneShot(dieSound);
+        }
+    }
 }
