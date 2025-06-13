@@ -121,7 +121,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 8c2f7d9214c4c2249aca229fb046cfae, type: 2}
 --- !u!1 &26043663
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,10 +600,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.14927673
+  m_Radius: 0.49786377
   m_Height: 1.4272757
   m_Direction: 1
-  m_Center: {x: -0.0017700195, y: 0.6907611, z: 0}
+  m_Center: {x: 0.0026245117, y: 0.6907611, z: 0}
 --- !u!54 &379828944
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -626,7 +626,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -648,9 +648,54 @@ MonoBehaviour:
   dialogueText: {fileID: 1246984122}
   skipButton: {fileID: 1566880771}
   dialogueLines:
-  - Tao La Bo May
-  - May la con tao
-  - Cai *beep* *beep* *beep* may
+  - DEET ME CUOC DOI
+  - DEET CON ME CUOC DOI
+  - FUCK MANU FR FR
+--- !u!95 &379828948 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 76e6642c5e0ac9543a9ff38fc7a34b30, type: 3}
+  m_PrefabInstance: {fileID: 1477477625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &379828950
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379828942}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 0.1
+  m_Acceleration: 10
+  avoidancePriority: 50
+  m_AngularSpeed: 180
+  m_StoppingDistance: 0.5
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &379828951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379828942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1e98052e650ec4e896f802c69b3882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 379828950}
+  animator: {fileID: 379828948}
+  centerPoint: {x: 222.4067, y: 11.162, z: 82.25}
+  walkRadius: 6
+  minWaitTime: 2
+  maxWaitTime: 5
 --- !u!1 &422081344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,11 +1128,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76e6642c5e0ac9543a9ff38fc7a34b30, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.405
+      value: 11.162
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76e6642c5e0ac9543a9ff38fc7a34b30, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 93.01486
+      value: 82.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 76e6642c5e0ac9543a9ff38fc7a34b30, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1138,6 +1183,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 76e6642c5e0ac9543a9ff38fc7a34b30, type: 3}
       insertIndex: -1
       addedObject: {fileID: 379828947}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 76e6642c5e0ac9543a9ff38fc7a34b30, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 379828951}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 76e6642c5e0ac9543a9ff38fc7a34b30, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 379828950}
   m_SourcePrefab: {fileID: 100100000, guid: 76e6642c5e0ac9543a9ff38fc7a34b30, type: 3}
 --- !u!1 &1510733139 stripped
 GameObject:
@@ -1569,7 +1620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8252257462869376588, guid: 41ba1f31320514747ae35451629398b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.648
+      value: 10.205
       objectReference: {fileID: 0}
     - target: {fileID: 8252257462869376588, guid: 41ba1f31320514747ae35451629398b1, type: 3}
       propertyPath: m_LocalPosition.z
