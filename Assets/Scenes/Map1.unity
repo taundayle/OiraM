@@ -648,9 +648,9 @@ MonoBehaviour:
   dialogueText: {fileID: 1246984122}
   skipButton: {fileID: 1566880771}
   dialogueLines:
-  - DEET ME CUOC DOI
-  - DEET CON ME CUOC DOI
-  - FUCK MANU FR FR
+  - EM CHAO THAY KHOA
+  - '"TOI YEU FPT FR FR"'
+  - ae minh cu the thoi he he he
 --- !u!95 &379828948 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 76e6642c5e0ac9543a9ff38fc7a34b30, type: 3}
