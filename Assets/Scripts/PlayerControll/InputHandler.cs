@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 namespace SA
@@ -28,6 +29,10 @@ namespace SA
         bool leftAxis_down;
         bool rightAxis_down;
 
+        float b_timer;
+        float rt_timer;
+        float lt_timer;
+
         StateManager states;
         CameraManager cameraManager;
 
@@ -49,6 +54,9 @@ namespace SA
             UpdateStates();
             states.FixedTick(delta);
             cameraManager.Tick(delta);
+
+            if(b_input == false)
+                b_timer = 0;
         }
 
         void Update()
@@ -78,6 +86,9 @@ namespace SA
             lb_input = Input.GetButton("LB");
 
             rightAxis_down = Input.GetButtonUp("L");  
+
+            if(b_input)
+                rt_timer += delta;
         }
         void UpdateStates()
         {
@@ -90,13 +101,13 @@ namespace SA
             float m = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             states.moveAmount = Mathf.Clamp01(m);
 
-            if(b_input)
+            if (b_input && b_timer > 0.5f)
             {
                 states.run = (states.moveAmount > 0);
             }
-            else
+            if(b_input == false && b_timer > 0 && b_timer < 0.5f)
             {
-                states.run = false;
+                states.run = !states.run;
             }
 
             states.rt = rt_input;
@@ -115,7 +126,7 @@ namespace SA
                 states.lockOn = !states.lockOn;
                 if (states.lockOnTarget == null)
                     states.lockOn = false;
-                cameraManager.lockonTarget = states.lockOnTarget.transform;
+                cameraManager.lockonTarget = states.lockOnTarget.GetTarget();
                 cameraManager.lockon = states.lockOn;
             }
         }

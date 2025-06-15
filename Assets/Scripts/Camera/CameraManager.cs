@@ -97,7 +97,7 @@ namespace SA
                 return;
             }
 
-            lookAngle += smoothX * targetSpeed;
+                lookAngle += smoothX * targetSpeed;
             transform.rotation = Quaternion.Euler(0, lookAngle, 0);
 
         }

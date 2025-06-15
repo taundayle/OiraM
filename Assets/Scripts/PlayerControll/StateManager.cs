@@ -38,7 +38,11 @@ namespace SA
         [HideInInspector]
         public Rigidbody rigid;
         [HideInInspector]
-        public AnimatorHook a_hook; 
+        public AnimatorHook a_hook;
+        [HideInInspector]
+        public ActionManager actionManager;
+        [HideInInspector]
+        public InventoryManager inventoryManager;
 
         [HideInInspector]
         public float delta;
@@ -54,6 +58,12 @@ namespace SA
             rigid.angularDrag = 999;
             rigid.drag = 4;
             rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+            inventoryManager = GetComponent<InventoryManager>();
+            inventoryManager.Init();
+
+            actionManager = GetComponent<ActionManager>();
+            actionManager.Init(this);
 
             a_hook = activeModel.AddComponent<AnimatorHook>();
             a_hook.Init(this);
@@ -156,14 +166,10 @@ namespace SA
 
             string targetAnim = null;
 
-            if (rb)
-                targetAnim = "attack1";
-            if (rt)
-                targetAnim = "attack2";
-            if (lt)
-                targetAnim = "attack3";
-            if (lb)
-                targetAnim = "th_attack1";
+            Action slot = actionManager.GetActionSlot(this);
+            if(slot == null)
+                return;
+            targetAnim = slot.targetAnim;
 
             if (string.IsNullOrEmpty(targetAnim))
                 return;
@@ -222,6 +228,15 @@ namespace SA
         public void HandleTwoHanded()
         {
             anim.SetBool("two_handed", isTwoHanded); 
+
+            if(isTwoHanded)
+            {
+                actionManager.UpdateAcionTwoHanded();
+            }
+            else
+            {
+                actionManager.UpdateActionOneHanded();
+            }
         }
 
     }
