@@ -87,6 +87,7 @@ public class PlayerUILevelUpManager : MonoBehaviour
     {
         exp -= expNeeded;
         level++;
+        FindObjectOfType<SkillTree>().AddPoints(1); // Thêm điểm kỹ năng khi lên cấp
         expNeeded = Mathf.RoundToInt(expNeeded * 1.15f); // Chi phí tăng 15% mỗi cấp
 
         #region Nâng cấp

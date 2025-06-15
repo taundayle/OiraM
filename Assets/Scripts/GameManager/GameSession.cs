@@ -5,8 +5,9 @@ using UnityEngine.UI;
 public class GameSession : GameManager
 {
     public PlayerUILevelUpManager playerUILevelUpManager;
-    [Header("Panel Upgrade")]
-    public GameObject UIUpLevel;
+    [Header("Panel")]
+    public GameObject UiUpIndex;
+    public GameObject UiUpLevel;
     #region Slider
     [Header("Slider")]
     public Slider healthSlider;
@@ -35,7 +36,8 @@ public class GameSession : GameManager
 
     private void Start()
     {
-        UIUpLevel.SetActive(false);
+        UiUpIndex.SetActive(false);
+        UiUpLevel.SetActive(false);
         UpdateUpgrade();
         easeHealth = Health;
         easeStamina = Stamina;
@@ -67,7 +69,13 @@ public class GameSession : GameManager
         ExpSlider();
         if (Input.GetKeyDown(KeyCode.U))
         {
-            UIUpLevel.SetActive(!UIUpLevel.activeSelf);
+            UiUpIndex.SetActive(!UiUpIndex.activeSelf);
+            UiUpLevel.SetActive(false);
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            UiUpLevel.SetActive(!UiUpLevel.activeSelf);
+            UiUpIndex.SetActive(false);
         }
     }
     void HealthSlider()

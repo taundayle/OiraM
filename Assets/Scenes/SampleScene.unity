@@ -160,6 +160,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &411804111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7850454961402518852, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+  m_PrefabInstance: {fileID: 1401681789070979261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &506230811
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +258,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &601097480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7064400688916971942, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+  m_PrefabInstance: {fileID: 1401681789070979261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &670241256
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,6 +644,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 516437044}
   m_SourcePrefab: {fileID: 100100000, guid: 222902ccbc3e0954f8d2e5cfd3b6fc40, type: 3}
+--- !u!114 &1246729704 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3518004986963229502, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+  m_PrefabInstance: {fileID: 1401681789070979261}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1246859131 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3002313892785662555, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
@@ -825,6 +846,60 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1632143349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1632143351}
+  - component: {fileID: 1632143350}
+  m_Layer: 0
+  m_Name: SkillTree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1632143350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632143349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e25436e8625bd4a96c4f0ccfb1465b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillLevels: 
+  SkillCaps: 
+  SkillNames: []
+  SkillDescriptions: []
+  SkillList: []
+  SkillHolder: {fileID: 411804111}
+  ConnectorList: []
+  ConnectorHolder: {fileID: 601097480}
+  SkillPoint: 0
+  TextSkillPoint: {fileID: 1246729704}
+--- !u!4 &1632143351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632143349}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 966.8033, y: 505.35245, z: 4.987835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1465,6 +1540,7 @@ SceneRoots:
   - {fileID: 1596066362}
   - {fileID: 705507995}
   - {fileID: 506230812}
+  - {fileID: 1632143351}
   - {fileID: 1401681789070979261}
   - {fileID: 1007293937094479881}
   - {fileID: 6088478351157958561}
