@@ -1019,61 +1019,6 @@ CapsuleCollider:
   m_Height: 1.3945518
   m_Direction: 1
   m_Center: {x: -0.007753581, y: 0.6818733, z: 0}
---- !u!1 &1975419919 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7648603544028184082, guid: 45e632b42e2993b49a26b83f7b97224f, type: 3}
-  m_PrefabInstance: {fileID: 6088478351157958561}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1975419925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1975419919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed9eb9217d5f5d438643b2b4196615b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionslot:
-  - input: 0
-    targetAnim: th_attack1
-  - input: 1
-    targetAnim: 
-  - input: 2
-    targetAnim: attack3
-  - input: 3
-    targetAnim: attack2
---- !u!114 &1975419926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1975419919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4657518e8710aca4db5b7c1a58017a21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curWeapon:
-    actions:
-    - input: 0
-      targetAnim: attack1
-    - input: 2
-      targetAnim: attack2
-    - input: 3
-      targetAnim: attack3
-    two_handedActions:
-    - input: 0
-      targetAnim: th_attack1
-    - input: 2
-      targetAnim: th_attack2
-    - input: 1
-      targetAnim: 
-    - input: 3
-      targetAnim: 
 --- !u!1001 &1007293937094479881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1337,10 +1282,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 562824522070540730, guid: 45e632b42e2993b49a26b83f7b97224f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 795901451641442757, guid: 45e632b42e2993b49a26b83f7b97224f, type: 3}
       propertyPath: lockOnTarget
       value: 
@@ -1392,13 +1333,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7648603544028184082, guid: 45e632b42e2993b49a26b83f7b97224f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1975419925}
-    - targetCorrespondingSourceObject: {fileID: 7648603544028184082, guid: 45e632b42e2993b49a26b83f7b97224f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1975419926}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45e632b42e2993b49a26b83f7b97224f, type: 3}
 --- !u!114 &7832312508910388470
 MonoBehaviour:

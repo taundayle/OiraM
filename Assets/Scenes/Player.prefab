@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 94918808937297876}
   - component: {fileID: 8130235774841068658}
   - component: {fileID: 795901451641442757}
+  - component: {fileID: 448463401951728049}
+  - component: {fileID: 4140803710405715023}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -133,10 +135,62 @@ MonoBehaviour:
   anim: {fileID: 0}
   rigid: {fileID: 0}
   a_hook: {fileID: 0}
+  actionManager: {fileID: 0}
+  inventoryManager: {fileID: 0}
   delta: 0
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &448463401951728049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7648603544028184082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed9eb9217d5f5d438643b2b4196615b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionslot:
+  - input: 0
+    targetAnim: th_attack1
+  - input: 1
+    targetAnim: 
+  - input: 2
+    targetAnim: attack3
+  - input: 3
+    targetAnim: attack2
+--- !u!114 &4140803710405715023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7648603544028184082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4657518e8710aca4db5b7c1a58017a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curWeapon:
+    actions:
+    - input: 0
+      targetAnim: attack1
+    - input: 2
+      targetAnim: attack2
+    - input: 3
+      targetAnim: attack3
+    two_handedActions:
+    - input: 0
+      targetAnim: th_attack1
+    - input: 2
+      targetAnim: th_attack2
+    - input: 1
+      targetAnim: 
+    - input: 3
+      targetAnim: 
 --- !u!1001 &4160078205165010856
 PrefabInstance:
   m_ObjectHideFlags: 0
