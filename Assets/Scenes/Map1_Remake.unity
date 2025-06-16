@@ -2954,6 +2954,18 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.7237172
       objectReference: {fileID: 0}
+    - target: {fileID: 3894746149785950945, guid: da8a8d8d876597a49af6b607c745e39a, type: 3}
+      propertyPath: m_AngularDrag
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894746149785950945, guid: da8a8d8d876597a49af6b607c745e39a, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894746149785950945, guid: da8a8d8d876597a49af6b607c745e39a, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5380540403472783259, guid: da8a8d8d876597a49af6b607c745e39a, type: 3}
       propertyPath: skipButton
       value: 
@@ -3025,6 +3037,18 @@ PrefabInstance:
     - target: {fileID: 6368658289655763127, guid: da8a8d8d876597a49af6b607c745e39a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154246809437513972, guid: da8a8d8d876597a49af6b607c745e39a, type: 3}
+      propertyPath: m_Height
+      value: 1.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154246809437513972, guid: da8a8d8d876597a49af6b607c745e39a, type: 3}
+      propertyPath: m_Radius
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154246809437513972, guid: da8a8d8d876597a49af6b607c745e39a, type: 3}
+      propertyPath: m_BaseOffset
+      value: -0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
