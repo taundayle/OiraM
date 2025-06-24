@@ -15,6 +15,7 @@ namespace SA
         public float moveAmount;
         public Vector3 moveDir;
         public bool rt, rb, lt, lb;
+        public bool rollInput;
 
         [Header("Stats")]
         public float moveSpeed = 2;
@@ -122,7 +123,9 @@ namespace SA
 
             if (!canMove)
                 return;
-            
+
+            HandleRolls();
+
             anim.applyRootMotion = false;
             rigid.drag = (moveAmount > 0 || onGround == false) ? 0 : 4;
 
@@ -185,6 +188,34 @@ namespace SA
             delta = d;
             onGround = OnGround();
             anim.SetBool("onGround", onGround);
+        }
+
+        void HandleRolls()
+        {
+            if (!rollInput)
+                return;
+            float v = vertical;
+            float h = horizontal;
+            if (lockOn == false)
+            {
+                v = 1;
+                h = 0;
+            }
+            else
+            {
+                if(Mathf.Abs(v) < 0.3f)
+                    v = 0;
+                if (Mathf.Abs(h) < 0.3f)
+                    h = 0;
+            }
+
+            anim.SetFloat("Vertical", v);
+            anim.SetFloat("Horizontal", h);
+
+            canMove = false;
+            inAction = true;
+            anim.CrossFade("Rolls", 0.2f);
+
         }
         void HandleMovementAnimations()
         {

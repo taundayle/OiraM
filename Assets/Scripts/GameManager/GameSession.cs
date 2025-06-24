@@ -99,6 +99,11 @@ public class GameSession : GameManager
         {
             staminaSlider.value = Stamina;
         }
+        if (Stamina != MaxStamina)
+        {
+            Stamina += Time.deltaTime * 3; // Tăng năng lượng theo thời gian
+            Stamina = Mathf.Clamp(Stamina, 0, MaxStamina);
+        }
         if (Stamina <= 0)
         {
             Debug.Log("Hết năng lượng");
@@ -114,13 +119,18 @@ public class GameSession : GameManager
         {
             manaSlider.value = Mana;
         }
-        if (Mana <= 0)
+        if (Mana != MaxMana)
         {
-            Debug.Log("Hết mana");
-        }
-        if (manaSlider.value != easeManaSlider.value)
-        {
-            easeManaSlider.value = Mathf.Lerp(easeManaSlider.value, Mana, lerpSpeedMana);
+            Mana += Time.deltaTime * 0.3f; // Tăng năng lượng theo thời gian
+            Mana = Mathf.Clamp(Mana, 0, MaxMana);
+            if (Mana <= 0)
+            {
+                Debug.Log("Hết mana");
+            }
+            if (manaSlider.value != easeManaSlider.value)
+            {
+                easeManaSlider.value = Mathf.Lerp(easeManaSlider.value, Mana, lerpSpeedMana);
+            }
         }
     }
     void ExpSlider()

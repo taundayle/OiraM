@@ -101,6 +101,8 @@ namespace SA
             float m = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             states.moveAmount = Mathf.Clamp01(m);
 
+            states.rollInput = b_input;
+
             if (b_input && b_timer > 0.5f)
             {
                 states.run = (states.moveAmount > 0);

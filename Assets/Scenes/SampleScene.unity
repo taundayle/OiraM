@@ -122,6 +122,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &293961126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7216133262213993419, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+  m_PrefabInstance: {fileID: 1401681789070979261}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &411804111 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7850454961402518852, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
@@ -953,6 +964,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 76e6642c5e0ac9543a9ff38fc7a34b30, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1019,6 +1034,39 @@ CapsuleCollider:
   m_Height: 1.3945518
   m_Direction: 1
   m_Center: {x: -0.007753581, y: 0.6818733, z: 0}
+--- !u!114 &1956017115 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3311209275466121421, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+  m_PrefabInstance: {fileID: 1401681789070979261}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2001697384 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1104865616435138613, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+  m_PrefabInstance: {fileID: 1401681789070979261}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2070046223 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9113392696098544768, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+  m_PrefabInstance: {fileID: 1401681789070979261}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1007293937094479881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1096,6 +1144,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2733046152587893, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+      propertyPath: m_Name
+      value: EasaStaminabar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104865616435138613, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1357692698315029907, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1104,14 +1160,38 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1913302692656814280, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+      propertyPath: m_Name
+      value: StaminaBar
+      objectReference: {fileID: 0}
     - target: {fileID: 2446878206949058727, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2454480220190011125, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+      propertyPath: m_Name
+      value: ManaBar
       objectReference: {fileID: 0}
     - target: {fileID: 2536821785629851566, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3002313892785662555, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+      propertyPath: manaSlider
+      value: 
+      objectReference: {fileID: 2001697384}
+    - target: {fileID: 3002313892785662555, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+      propertyPath: staminaSlider
+      value: 
+      objectReference: {fileID: 2070046223}
+    - target: {fileID: 3002313892785662555, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+      propertyPath: easeManaSlider
+      value: 
+      objectReference: {fileID: 1956017115}
+    - target: {fileID: 3002313892785662555, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+      propertyPath: easeStaminaSlider
+      value: 
+      objectReference: {fileID: 293961126}
     - target: {fileID: 3458290342427055166, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1122,6 +1202,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4556160646686768346, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897526159540533838, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5897526159540533838, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
@@ -1175,6 +1259,10 @@ PrefabInstance:
     - target: {fileID: 8965038373543682647, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9067213797309802215, guid: c94a0217b0b79334daa5a0a5a7771040, type: 3}
+      propertyPath: m_Name
+      value: EaseManabar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
